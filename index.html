@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#801828" />
+  <meta name="description" content="Shop skincare and beauty essentials with Suavy Beauty. Healthy skin. Soft glow. Authentic and affordable." />
+  <title>Suavy Beauty | Healthy Skin. Soft Glow.</title>
+
+  <!-- Google Fonts: remove these imports and use system fonts if you prefer no external font request. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      /* Brand & Layout Accent Colors */
+      --color-primary-red: #801828;      /* Headings, main text branding, dark accent */
+      --color-soft-pink: #FCE8EA;        /* Hero background section tint */
+      --color-neutral-beige: #F5EFEB;    /* Soft content/card background */
+      --color-header-bg: #FFFFFF;        /* Header & input background */
+
+      /* Text & Interactive Colors */
+      --color-text-primary: #1A1A1A;     /* Primary dark text & main headers */
+      --color-text-secondary: #555555;  /* Body copy and secondary text */
+      --color-btn-black: #000000;       /* Solid CTA buttons */
+      --color-btn-text: #FFFFFF;         /* CTA button text */
+      --color-border-subtle: #E0E0E0;    /* Card and input borders */
+
+      /* Supporting design tokens */
+      --color-white: #FFFFFF;
+      --color-champagne: #C8A77B;
+      --color-pink-dark: #F4D2D6;
+      --shadow-soft: 0 18px 45px rgba(69, 27, 34, 0.09);
+      --radius-card: 18px;
+      --container: 1200px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    body {
+      margin: 0;
+      color: var(--color-text-primary);
+      background: var(--color-header-bg);
+      font-family: "DM Sans", Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.menu-open { overflow: hidden; }
+    img { max-width: 100%; display: block; }
+    button, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+    .container { width: min(var(--container), calc(100% - 44px)); margin-inline: auto; }
+    .serif { font-family: "Playfair Display", Georgia, serif; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--color-primary-red);
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 25px; height: 1px; background: var(--color-champagne); }
+    .section { padding: 76px 0; }
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+    .section-heading h2 {
+      margin: 8px 0 0;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(2rem, 3.4vw, 2.8rem);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+    }
+    .section-heading p { max-width: 420px; margin: 10px 0 0; color: var(--color-text-secondary); font-size: 0.94rem; }
+    .text-link { display: inline-flex; align-items: center; gap: 8px; color: var(--color-primary-red); font-weight: 700; font-size: 0.88rem; white-space: nowrap; }
+    .text-link span { font-size: 1.2rem; transition: transform .2s ease; }
+    .text-link:hover span { transform: translateX(4px); }
+
+    /* Announcement + header */
+    .announcement {
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 16px;
+      background: var(--color-primary-red);
+      color: var(--color-white);
+      text-align: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.055em;
+    }
+    .announcement strong { margin: 0 4px; color: #FFE4D9; }
+    .site-header { position: relative; z-index: 20; background: var(--color-header-bg); }
+    .header-main {
+      display: grid;
+      grid-template-columns: 1fr minmax(220px, 440px) 1fr;
+      align-items: center;
+      gap: 28px;
+      min-height: 94px;
+    }
+    .brand { display: inline-flex; align-items: center; width: max-content; gap: 11px; }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      flex: 0 0 43px;
+      width: 43px;
+      height: 43px;
+      border: 1px solid var(--color-champagne);
+      border-radius: 50%;
+      color: var(--color-primary-red);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      line-height: 1;
+    }
+    .brand-name { display: block; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: 1.45rem; font-weight: 600; line-height: 1.1; letter-spacing: 0.035em; }
+    .brand-tagline { display: block; margin-top: 5px; color: var(--color-text-secondary); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .search-form { position: relative; display: flex; height: 45px; border: 1px solid var(--color-border-subtle); border-radius: 3px; background: #fff; }
+    .search-form:focus-within { border-color: var(--color-primary-red); box-shadow: 0 0 0 3px rgba(128, 24, 40, 0.08); }
+    .search-form input { width: 100%; min-width: 0; border: 0; outline: 0; padding: 0 14px; background: transparent; color: var(--color-text-primary); font-size: 0.86rem; }
+    .search-form input::placeholder { color: #888; }
+    .search-form button { display: grid; place-items: center; width: 48px; flex: 0 0 48px; border: 0; background: transparent; color: var(--color-primary-red); }
+    .search-form svg { width: 19px; height: 19px; }
+    .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+    .icon-action { display: inline-flex; align-items: center; gap: 8px; padding: 6px 0; border: 0; background: transparent; color: var(--color-text-primary); font-size: 0.8rem; }
+    .icon-action svg { width: 21px; height: 21px; stroke-width: 1.6; }
+    .cart-count { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 4px; margin-left: -5px; border-radius: 50%; background: var(--color-primary-red); color: white; font-size: 0.65rem; }
+    .main-nav-wrap { border-top: 1px solid #f0e9e7; border-bottom: 1px solid var(--color-border-subtle); }
+    .main-nav { display: flex; align-items: center; justify-content: center; gap: clamp(16px, 2.8vw, 36px); min-height: 48px; }
+    .main-nav a { padding: 13px 0; color: #292323; font-size: 0.77rem; font-weight: 700; letter-spacing: 0.025em; transition: color .2s ease; }
+    .main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--color-primary-red); }
+    .category-nav { border-bottom: 1px solid #f3efed; background: #fff; }
+    .category-nav .container { display: flex; justify-content: center; align-items: center; gap: clamp(15px, 2.15vw, 28px); min-height: 43px; overflow-x: auto; scrollbar-width: none; }
+    .category-nav .container::-webkit-scrollbar { display: none; }
+    .category-nav a { flex: 0 0 auto; padding: 11px 0; color: var(--color-text-secondary); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; }
+    .category-nav a:hover { color: var(--color-primary-red); }
+    .mobile-menu-button { display: none; border: 1px solid var(--color-border-subtle); border-radius: 4px; padding: 9px; background: white; color: var(--color-primary-red); }
+    .mobile-menu-button svg { display: block; width: 22px; height: 22px; }
+
+    /* Hero */
+    .hero { overflow: hidden; background: var(--color-soft-pink); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr); align-items: center; gap: clamp(35px, 6vw, 78px); min-height: 520px; padding-top: 34px; padding-bottom: 34px; }
+    .hero-copy { padding: 25px 0 30px; }
+    .hero-copy .eyebrow { margin-bottom: 16px; }
+    .hero h1 { max-width: 570px; margin: 0; font-family: "Playfair Display", Georgia, serif; color: var(--color-primary-red); font-size: clamp(3rem, 5.4vw, 5.1rem); font-weight: 500; letter-spacing: -0.055em; line-height: .99; }
+    .hero h1 em { color: var(--color-text-primary); font-weight: 500; }
+    .hero-copy p { max-width: 435px; margin: 24px 0 28px; color: #53474a; font-size: 1rem; line-height: 1.8; }
+    .button-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; gap: 10px; min-height: 48px; padding: 0 23px; border: 1px solid transparent; border-radius: 2px; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-dark { background: var(--color-btn-black); color: var(--color-btn-text); }
+    .btn-dark:hover { background: var(--color-primary-red); }
+    .btn-outline { border-color: rgba(128, 24, 40, .35); background: transparent; color: var(--color-primary-red); }
+    .btn-outline:hover { border-color: var(--color-primary-red); background: rgba(255,255,255,.45); }
+    .hero-note { display: flex; align-items: center; gap: 11px; margin-top: 30px; color: #5f5152; font-size: .75rem; }
+    .hero-note .stars { color: var(--color-primary-red); letter-spacing: 2px; }
+    .hero-visual { position: relative; min-width: 0; }
+    .hero-image-frame { position: relative; overflow: hidden; aspect-ratio: 1.02 / 1; border-radius: 49% 49% 4px 4px; background: #efd4d4; box-shadow: var(--shadow-soft); }
+    .hero-image-frame::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 58%, rgba(53, 23, 25, .13)); pointer-events: none; }
+    .hero-image-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-stamp { position: absolute; z-index: 2; right: -18px; bottom: 34px; display: grid; place-content: center; width: 115px; height: 115px; padding: 12px; border: 1px solid var(--color-champagne); border-radius: 50%; background: #fffdf9; color: var(--color-primary-red); text-align: center; transform: rotate(8deg); box-shadow: 0 12px 28px rgba(70, 25, 33, .11); }
+    .hero-stamp strong { display: block; font-family: "Playfair Display", Georgia, serif; font-size: 1.65rem; font-weight: 600; line-height: 1.05; }
+    .hero-stamp span { display: block; margin-top: 7px; font-size: .57rem; font-weight: 700; letter-spacing: .1em; line-height: 1.4; text-transform: uppercase; }
+    .hero-deco { position: absolute; z-index: 0; left: -28px; bottom: -24px; width: 100px; height: 100px; border: 1px solid rgba(128, 24, 40, .2); border-radius: 50%; }
+
+    /* Trust strip */
+    .trust-strip { border-bottom: 1px solid var(--color-border-subtle); background: white; }
+    .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .trust-item { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 88px; padding: 17px 12px; border-right: 1px solid #eee8e6; }
+    .trust-item:first-child { border-left: 1px solid #eee8e6; }
+    .trust-icon { display: grid; place-items: center; flex: 0 0 36px; width: 36px; height: 36px; border-radius: 50%; background: var(--color-soft-pink); color: var(--color-primary-red); }
+    .trust-icon svg { width: 18px; height: 18px; }
+    .trust-item strong { display: block; font-size: .78rem; font-weight: 700; }
+    .trust-item span { display: block; margin-top: 2px; color: var(--color-text-secondary); font-size: .69rem; }
+
+    /* Category cards */
+    .category-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+    .category-card { position: relative; display: block; overflow: hidden; border-radius: var(--radius-card); background: var(--color-neutral-beige); }
+    .category-image { overflow: hidden; aspect-ratio: 1 / 1.05; background: var(--color-neutral-beige); }
+    .category-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
+    .category-card:hover .category-image img { transform: scale(1.05); }
+    .category-content { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 17px 17px 18px; background: #fff; }
+    .category-content h3 { margin: 0; font-family: "Playfair Display", Georgia, serif; font-size: 1.19rem; font-weight: 600; }
+    .category-content span { color: var(--color-primary-red); font-size: 1.3rem; }
+
+    /* Product cards */
+    .featured-section { background: #fcf9f8; }
+    .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+    .product-card { min-width: 0; border: 1px solid #eee6e3; border-radius: 10px; background: #fff; transition: box-shadow .25s ease, transform .25s ease; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+    .product-image-wrap { position: relative; overflow: hidden; aspect-ratio: 1 / 1.04; background: #f8f1ef; border-radius: 9px 9px 0 0; }
+    .product-image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+    .product-card:hover .product-image-wrap img { transform: scale(1.04); }
+    .product-badge { position: absolute; top: 12px; left: 12px; padding: 5px 8px; border-radius: 2px; background: #fff; color: var(--color-primary-red); font-size: .61rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .product-info { padding: 15px 15px 16px; }
+    .product-brand { margin: 0 0 5px; color: #8c7375; font-size: .66rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .product-title { min-height: 45px; margin: 0; font-size: .86rem; font-weight: 600; line-height: 1.5; }
+    .product-price { margin: 9px 0 13px; color: var(--color-primary-red); font-size: .95rem; font-weight: 700; }
+    .add-to-bag { display: flex; justify-content: center; align-items: center; gap: 8px; width: 100%; min-height: 40px; border: 1px solid var(--color-border-subtle); border-radius: 2px; background: #fff; color: var(--color-text-primary); font-size: .69rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+    .add-to-bag:hover { border-color: var(--color-primary-red); background: var(--color-primary-red); color: #fff; }
+    .add-to-bag svg { width: 16px; height: 16px; }
+    .empty-search { display: none; grid-column: 1 / -1; padding: 32px; border: 1px dashed var(--color-border-subtle); color: var(--color-text-secondary); text-align: center; }
+
+    /* Mid-page promotion */
+    .routine-banner { padding: 0 0 76px; }
+    .routine-inner { display: grid; grid-template-columns: 1.08fr .92fr; overflow: hidden; border-radius: 15px; background: var(--color-neutral-beige); }
+    .routine-copy { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(28px, 5vw, 64px); }
+    .routine-copy h2 { max-width: 430px; margin: 12px 0 15px; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 500; letter-spacing: -.04em; line-height: 1.08; }
+    .routine-copy p { max-width: 420px; margin: 0 0 24px; color: var(--color-text-secondary); font-size: .93rem; }
+    .routine-image { min-height: 300px; background: #e8d5cb; }
+    .routine-image img { width: 100%; height: 100%; min-height: 300px; object-fit: cover; }
+
+    /* Footer */
+    .site-footer { background: #241a1b; color: #fff; }
+    .footer-main { display: grid; grid-template-columns: 1.4fr .8fr .8fr 1fr; gap: 42px; padding: 58px 0 45px; }
+    .footer-brand .brand-name { color: #fff; }
+    .footer-brand .brand-tagline { color: #d8caca; }
+    .footer-brand .brand-mark { color: #f5d3d5; border-color: var(--color-champagne); }
+    .footer-brand p { max-width: 280px; margin: 18px 0 0; color: #d5c9c9; font-size: .85rem; }
+    .footer-column h3 { margin: 0 0 17px; color: #f5d3d5; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; }
+    .footer-column a { display: block; width: max-content; max-width: 100%; margin: 10px 0; color: #ded4d4; font-size: .82rem; transition: color .2s ease; }
+    .footer-column a:hover { color: #fff; }
+    .footer-note { max-width: 320px; color: #d5c9c9; font-size: .82rem; }
+    .social-row { display: flex; gap: 10px; margin-top: 17px; }
+    .social-link { display: grid !important; place-items: center; width: 38px; height: 38px; margin: 0 !important; border: 1px solid #6e5b5e; border-radius: 50%; color: white !important; }
+    .social-link svg { width: 17px; height: 17px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 17px 0; border-top: 1px solid #514144; color: #bcaeaf; font-size: .72rem; }
+    .footer-bottom p { margin: 0; }
+    .footer-bottom a { color: #e4d6d7; }
+
+    /* Toast feedback for demo interactions */
+    .toast { position: fixed; z-index: 100; right: 22px; bottom: 22px; max-width: min(380px, calc(100% - 44px)); padding: 14px 18px; border-radius: 7px; background: #241a1b; color: #fff; box-shadow: 0 10px 35px rgba(0,0,0,.2); font-size: .85rem; opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .25s ease, transform .25s ease; }
+    .toast.is-visible { opacity: 1; transform: translateY(0); }
+    .sr-only { position: absolute; overflow: hidden; clip: rect(0,0,0,0); width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; }
+
+
+    /* WhatsApp cart and checkout */
+    .cart-modal-backdrop { position: fixed; inset: 0; z-index: 2000; display: none; align-items: center; justify-content: center; padding: 18px; background: rgba(20, 10, 12, .58); }
+    .cart-modal-backdrop.is-open { display: flex; }
+    .cart-modal { width: min(100%, 560px); max-height: min(90vh, 780px); overflow: auto; background: #fff; border-radius: 20px; box-shadow: 0 24px 80px rgba(0,0,0,.25); }
+    .cart-modal-header { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 22px; background: #fff; border-bottom: 1px solid var(--color-border-subtle); z-index: 1; }
+    .cart-modal-header h2 { margin: 0; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-weight: 500; font-size: 1.6rem; }
+    .cart-close { border: 1px solid var(--color-border-subtle); border-radius: 50%; background: #fff; width: 38px; height: 38px; font-size: 1.35rem; }
+    .cart-modal-body { padding: 20px 22px 24px; }
+    .cart-items { display: grid; gap: 12px; }
+    .cart-line { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 13px 0; border-bottom: 1px solid #eee; }
+    .cart-line h3 { margin: 0 0 4px; font-size: .95rem; }
+    .cart-line-price { color: var(--color-primary-red); font-weight: 700; }
+    .cart-line-controls { display: flex; align-items: center; gap: 7px; margin-top: 9px; }
+    .cart-line-controls button { min-width: 30px; height: 30px; border: 1px solid var(--color-border-subtle); background: #fff; border-radius: 7px; }
+    .cart-line-controls .remove-item { width: auto; padding: 0 8px; color: #801828; font-size: .8rem; }
+    .cart-subtotal { display: flex; justify-content: space-between; gap: 16px; padding: 18px 0; font-weight: 700; font-size: 1.05rem; }
+    .cart-empty { text-align: center; padding: 24px 8px; color: var(--color-text-secondary); }
+    .checkout-fields { display: grid; gap: 12px; margin-top: 14px; }
+    .checkout-fields label { display: grid; gap: 5px; font-size: .86rem; font-weight: 600; }
+    .checkout-fields input, .checkout-fields textarea { width: 100%; border: 1px solid var(--color-border-subtle); border-radius: 9px; padding: 11px 12px; background: #fff; color: var(--color-text-primary); }
+    .checkout-fields textarea { min-height: 76px; resize: vertical; }
+    .whatsapp-checkout { width: 100%; display: flex; justify-content: center; align-items: center; gap: 9px; margin-top: 18px; padding: 14px 18px; border: 0; border-radius: 9px; background: #167746; color: white; font-weight: 700; }
+    .whatsapp-checkout:hover { background: #11653b; }
+    .checkout-note { margin: 10px 0 0; color: var(--color-text-secondary); font-size: .78rem; }
+    @media (max-width: 480px) { .cart-modal-header, .cart-modal-body { padding-left: 16px; padding-right: 16px; } }
+
+    @media (max-width: 1000px) {
+      .header-main { grid-template-columns: 1fr minmax(200px, 340px) auto; gap: 18px; }
+      .header-actions .action-label { display: none; }
+      .header-actions { gap: 15px; }
+      .main-nav { gap: 20px; }
+      .category-nav .container { justify-content: flex-start; }
+      .hero-grid { gap: 36px; min-height: 460px; }
+      .hero h1 { font-size: clamp(2.9rem, 6vw, 4.3rem); }
+      .product-grid, .category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .category-image { aspect-ratio: 1.2 / 1; }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 700px) {
+      .container { width: min(var(--container), calc(100% - 30px)); }
+      .announcement { font-size: .64rem; }
+      .header-main { grid-template-columns: auto 1fr auto; gap: 12px; min-height: 78px; }
+      .brand { gap: 8px; }
+      .brand-mark { flex-basis: 36px; width: 36px; height: 36px; font-size: 1.35rem; }
+      .brand-name { font-size: 1.15rem; }
+      .brand-tagline { font-size: .48rem; letter-spacing: .08em; }
+      .header-main > .search-form { display: none; }
+      .mobile-menu-button { display: inline-grid; place-items: center; }
+      .header-actions { gap: 12px; }
+      .header-actions .icon-action { gap: 2px; }
+      .header-actions svg { width: 20px; height: 20px; }
+      .cart-count { margin-left: -1px; }
+      .main-nav-wrap { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 30; border-top: 1px solid var(--color-border-subtle); background: white; box-shadow: 0 15px 25px rgba(0,0,0,.08); }
+      .main-nav-wrap.is-open { display: block; }
+      .main-nav { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 10px 22px; }
+      .main-nav a { padding: 13px 0; border-bottom: 1px solid #f2eceb; font-size: .83rem; }
+      .main-nav a:last-child { border-bottom: 0; }
+      .category-nav .container { min-height: 41px; gap: 21px; }
+      .category-nav a { font-size: .64rem; }
+      .hero-grid { grid-template-columns: 1fr; gap: 18px; padding-top: 37px; padding-bottom: 34px; }
+      .hero-copy { padding: 0; }
+      .hero h1 { max-width: 510px; font-size: clamp(3rem, 13vw, 4.5rem); }
+      .hero-copy p { margin: 17px 0 23px; font-size: .91rem; }
+      .hero-note { margin-top: 20px; }
+      .hero-visual { width: min(100%, 470px); margin: 0 auto; }
+      .hero-image-frame { aspect-ratio: 1.12 / 1; border-radius: 45% 45% 4px 4px; }
+      .hero-stamp { right: -5px; bottom: 17px; width: 94px; height: 94px; }
+      .hero-stamp strong { font-size: 1.35rem; }
+      .hero-stamp span { font-size: .49rem; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .trust-item { justify-content: flex-start; min-height: 77px; padding: 13px 8px; border-bottom: 1px solid #eee8e6; }
+      .trust-item:nth-child(odd) { border-left: 1px solid #eee8e6; }
+      .trust-item:nth-child(even) { border-right: 1px solid #eee8e6; }
+      .trust-item strong { font-size: .72rem; }
+      .trust-item span { font-size: .63rem; }
+      .section { padding: 54px 0; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 13px; margin-bottom: 22px; }
+      .section-heading h2 { font-size: 2.15rem; }
+      .section-heading p { font-size: .87rem; }
+      .category-grid, .product-grid { gap: 12px; }
+      .category-content { padding: 13px 12px; }
+      .category-content h3 { font-size: 1rem; }
+      .category-content span { font-size: 1.1rem; }
+      .product-info { padding: 12px; }
+      .product-title { min-height: 49px; font-size: .79rem; }
+      .product-price { font-size: .88rem; }
+      .product-badge { top: 8px; left: 8px; font-size: .55rem; }
+      .add-to-bag { min-height: 38px; font-size: .61rem; }
+      .routine-banner { padding-bottom: 54px; }
+      .routine-inner { grid-template-columns: 1fr; }
+      .routine-copy { padding: 30px 24px; }
+      .routine-copy h2 { font-size: 2.35rem; }
+      .routine-image { order: -1; min-height: 220px; max-height: 280px; }
+      .routine-image img { min-height: 220px; max-height: 280px; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 30px 22px; padding: 44px 0 32px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-brand p { max-width: 360px; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; gap: 6px; }
+    }
+    @media (max-width: 380px) {
+      .container { width: calc(100% - 24px); }
+      .brand-tagline { display: none; }
+      .header-main { gap: 8px; }
+      .header-actions { gap: 8px; }
+      .category-grid, .product-grid { gap: 9px; }
+      .category-content h3 { font-size: .9rem; }
+      .product-info { padding: 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">
+    YOUR BEAUTY ROUTINE, MADE SIMPLE <strong>•</strong> Authentic beauty essentials, selected with care
+  </div>
+
+  <header class="site-header">
+    <div class="container header-main">
+      <button class="mobile-menu-button" id="mobileMenuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNavWrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </button>
+
+      <a class="brand" href="index.html" aria-label="Suavy Beauty homepage">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span>
+          <span class="brand-name">SUAVY BEAUTY</span>
+          <span class="brand-tagline">Healthy skin. Soft glow.</span>
+        </span>
+      </a>
+
+      <form class="search-form" id="desktopSearchForm" role="search">
+        <label class="sr-only" for="desktopSearch">Search products</label>
+        <input id="desktopSearch" type="search" placeholder="Search skincare, brands and more..." autocomplete="off" />
+        <button type="submit" aria-label="Search products">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
+        </button>
+      </form>
+
+      <div class="header-actions">
+        <a class="icon-action" href="account.html" aria-label="My account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.5-3.5 3.2-5.5 7-5.5s6.5 2 7 5.5"/></svg>
+          <span class="action-label">Account</span>
+        </a>
+        <button class="icon-action" id="cartButton" type="button" aria-label="Shopping bag, 0 items">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+          <span class="action-label">Bag</span><span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="main-nav-wrap" id="mainNavWrap">
+      <nav class="main-nav container" aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+
+    <nav class="category-nav" aria-label="Shop categories">
+      <div class="container">
+        <a href="brands.html">Brands</a>
+        <a href="for-women.html">For Women</a>
+        <a href="skincare.html">Skincare</a>
+        <a href="sunscreen.html">Sunscreen</a>
+        <a href="bath-body.html">Bath &amp; Body</a>
+        <a href="face.html">Face</a>
+        <a href="oils-serums.html">Oils &amp; Serums</a>
+        <a href="treatments.html">Treatments</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Your everyday beauty destination</span>
+          <h1 id="heroTitle">Healthy skin.<br /><em>Beautifully</em> you.</h1>
+          <p>Discover skincare and body-care favourites selected to make your everyday routine feel special — without making shopping complicated.</p>
+          <div class="button-row">
+            <a class="btn btn-dark" href="#featured">Shop favourites <span aria-hidden="true">→</span></a>
+            <a class="btn btn-outline" href="#categories">Explore categories</a>
+          </div>
+          <div class="hero-note"><span class="stars" aria-hidden="true">✦ ✦ ✦</span><span>Thoughtful essentials. A glow that feels like you.</span></div>
+        </div>
+        <div class="hero-visual">
+          <span class="hero-deco" aria-hidden="true"></span>
+          <div class="hero-image-frame">
+            <img src="https://www.skinguardapp.com/assets/beauty/routine-flatlay.png" alt="Skincare bottles and moisturisers arranged on a soft marble background" fetchpriority="high" />
+          </div>
+          <div class="hero-stamp" aria-label="Suavy Beauty brand message"><strong>Soft<br />glow</strong><span>Everyday<br />essentials</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="Shopping highlights">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 7 3v5c0 4.4-2.9 7.8-7 10-4.1-2.2-7-5.6-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <div><strong>Authenticity first</strong><span>Beauty products selected with care</span></div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7z"/><circle cx="7.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg></span>
+          <div><strong>Delivery options</strong><span>Choose an available delivery method</span></div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M16.5 7.5c0-1.7-1.8-3-4.5-3S7.5 5.8 7.5 7.5s1.8 3 4.5 4.5 4.5 2.8 4.5 4.5-1.8 3-4.5 3-4.5-1.3-4.5-3"/></svg></span>
+          <div><strong>Prices in naira</strong><span>Clear product pricing</span></div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 8.7 4a8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.4Z"/></svg></span>
+          <div><strong>Friendly support</strong><span>Help when you need it</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="categories" aria-labelledby="categoriesTitle">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="eyebrow">Find your favourites</span><h2 id="categoriesTitle">Shop by category</h2><p>Explore everyday essentials and discover products for your personal care routine.</p></div>
+          <a class="text-link" href="skincare.html">Browse all categories <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="category-grid">
+          <a class="category-card" href="skincare.html">
+            <div class="category-image"><img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&amp;fit=crop&amp;w=700&amp;q=85" alt="Skincare products arranged for a simple daily routine" loading="lazy" /></div>
+            <div class="category-content"><h3>Skincare</h3><span aria-hidden="true">↗</span></div>
+          </a>
+          <a class="category-card" href="bath-body.html">
+            <div class="category-image"><img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&amp;fit=crop&amp;w=700&amp;q=85" alt="Body-care products arranged neatly" loading="lazy" /></div>
+            <div class="category-content"><h3>Bath &amp; Body</h3><span aria-hidden="true">↗</span></div>
+          </a>
+          <a class="category-card" href="sunscreen.html">
+            <div class="category-image"><img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&amp;fit=crop&amp;w=700&amp;q=85" alt="Cream and skincare products in soft natural light" loading="lazy" /></div>
+            <div class="category-content"><h3>Sunscreen</h3><span aria-hidden="true">↗</span></div>
+          </a>
+          <a class="category-card" href="oils-serums.html">
+            <div class="category-image"><img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&amp;fit=crop&amp;w=700&amp;q=85" alt="Serums and skincare bottles on a clean background" loading="lazy" /></div>
+            <div class="category-content"><h3>Oils &amp; Serums</h3><span aria-hidden="true">↗</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section featured-section" id="featured" aria-labelledby="featuredTitle">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="eyebrow">A little beauty inspiration</span><h2 id="featuredTitle">Featured favourites</h2><p>A preview of the kind of beauty essentials you will find at Suavy Beauty.</p></div>
+          <a class="text-link" href="shop.html">Shop all products <span aria-hidden="true">→</span></a>
+        </div>
+        <!-- DEMO CONTENT: replace sample product prices, copy and generic photography with verified inventory before launch. -->
+        <div class="product-grid" id="productGrid">
+          <article class="product-card" data-search="anua heartleaf soothing toner skincare face toner">
+            <div class="product-image-wrap">
+              <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&amp;fit=crop&amp;w=650&amp;q=85" alt="Skincare bottles representing a toner product" loading="lazy" />
+              <span class="product-badge">Customer favourite</span>
+            </div>
+            <div class="product-info">
+              <p class="product-brand">Anua</p>
+              <h3 class="product-title">Heartleaf Soothing Toner</h3>
+              <p class="product-price">₦28,000</p>
+              <button class="add-to-bag" type="button" data-product="Anua Heartleaf Soothing Toner" data-price="28000"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Add to bag</button>
+            </div>
+          </article>
+          <article class="product-card" data-search="eos shea better body lotion bath body lotion">
+            <div class="product-image-wrap">
+              <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&amp;fit=crop&amp;w=650&amp;q=85" alt="Body-care bottle representing body lotion" loading="lazy" />
+              <span class="product-badge">Body care</span>
+            </div>
+            <div class="product-info">
+              <p class="product-brand">EOS</p>
+              <h3 class="product-title">Shea Better Body Lotion</h3>
+              <p class="product-price">₦18,500</p>
+              <button class="add-to-bag" type="button" data-product="EOS Shea Better Body Lotion" data-price="18500"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Add to bag</button>
+            </div>
+          </article>
+          <article class="product-card" data-search="olay vitamin c moisturizer face cream skincare">
+            <div class="product-image-wrap">
+              <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&amp;fit=crop&amp;w=650&amp;q=85" alt="Moisturiser and face-care products on a neutral background" loading="lazy" />
+              <span class="product-badge">Face care</span>
+            </div>
+            <div class="product-info">
+              <p class="product-brand">Olay</p>
+              <h3 class="product-title">Daily Moisturising Cream</h3>
+              <p class="product-price">₦22,000</p>
+              <button class="add-to-bag" type="button" data-product="Olay Daily Moisturising Cream" data-price="22000"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Add to bag</button>
+            </div>
+          </article>
+          <article class="product-card" data-search="dove deeply nourishing body wash bath body cleanser">
+            <div class="product-image-wrap">
+              <img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&amp;fit=crop&amp;w=650&amp;q=85" alt="Personal-care bottles representing a body wash product" loading="lazy" />
+              <span class="product-badge">Everyday essential</span>
+            </div>
+            <div class="product-info">
+              <p class="product-brand">Dove</p>
+              <h3 class="product-title">Nourishing Body Wash</h3>
+              <p class="product-price">₦9,500</p>
+              <button class="add-to-bag" type="button" data-product="Dove Nourishing Body Wash" data-price="9500"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> Add to bag</button>
+            </div>
+          </article>
+          <div class="empty-search" id="emptySearch">No featured products match that search. Try a brand name or a category such as “skincare”.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="routine-banner" aria-labelledby="routineTitle">
+      <div class="container routine-inner">
+        <div class="routine-copy">
+          <span class="eyebrow">Small rituals, lovely moments</span>
+          <h2 id="routineTitle">Make room for your glow.</h2>
+          <p>From everyday body care to skincare favourites, find the little essentials that make your routine feel like yours.</p>
+          <a class="btn btn-dark" href="shop.html">Explore the collection <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="routine-image">
+          <img src="https://www.skinguardapp.com/assets/beauty/routine-flatlay.png" alt="A neat collection of skincare bottles and creams on a light marble surface" loading="lazy" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Suavy Beauty home">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span><span class="brand-name">SUAVY BEAUTY</span><span class="brand-tagline">Healthy skin. Soft glow.</span></span>
+        </a>
+        <p>Authentic and affordable skincare and beauty essentials, chosen to make shopping feel simple.</p>
+        <div class="social-row">
+          <!-- Replace these placeholder links with the business's official social accounts before launch. -->
+          <a class="social-link placeholder-link" href="#" aria-label="Instagram" data-message="Add Suavy Beauty's Instagram link here before launch."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r=".8" fill="currentColor"/></svg></a>
+          <a class="social-link placeholder-link" href="#" aria-label="WhatsApp" data-message="Add Suavy Beauty's WhatsApp number here before launch."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 8.7 4a8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.4Z"/><path d="M9 8.7c.3-.7.7-.7 1-.7l.6.1c.2 0 .3.2.4.5l.6 1.4c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4 0 .6.4.7 1.1 1.3 1.8 1.7.3.2.5.2.7-.1l.7-.8c.2-.2.4-.2.7-.1l1.3.6c.3.1.4.3.4.5 0 .3-.2.9-.6 1.2-.4.4-1.2.6-1.9.5-.8-.1-1.9-.6-3.1-1.7-1.4-1.3-2-2.5-2.2-3.4-.2-.8.1-1.3.2-1.5Z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Explore</h3>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Suavy</a>
+        <a href="shop.html">Shop all products</a>
+        <a href="brands.html">Our brands</a>
+      </div>
+      <div class="footer-column">
+        <h3>Customer care</h3>
+        <a href="contact.html">Contact us</a>
+        <a href="delivery.html">Delivery information</a>
+        <a href="returns.html">Returns &amp; refunds</a>
+        <a href="privacy.html">Privacy policy</a>
+      </div>
+      <div class="footer-column">
+        <h3>Beauty notes</h3>
+        <p class="footer-note">Get updates about new arrivals and special offers. Newsletter sign-up will be connected when the website backend is added.</p>
+        <form id="newsletter-form" class="search-form" style="margin-top:15px" aria-label="Newsletter signup">
+        
+          <label class="sr-only" for="newsletter-email">
+            Email address
+          </label>
+        
+          <input id="newsletter-email" type="email" placeholder="Your email address" required />
+        
+          <button type="submit" aria-label="Sign up for beauty updates">
+            <span aria-hidden="true">→</span>
+          </button>
+        
+          <p id="newsletter-message" aria-live="polite"></p>
+        </form>
+
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="currentYear">2026</span> Suavy Beauty. All rights reserved.</p>
+      <p>Healthy skin. Soft glow. Authentic and affordable.</p>
+    </div>
+  </footer>
+
+
+  <div class="cart-modal-backdrop" id="cartModalBackdrop" aria-hidden="true">
+    <section class="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
+      <div class="cart-modal-header">
+        <h2 id="cartModalTitle">Your shopping bag</h2>
+        <button class="cart-close" id="cartCloseButton" type="button" aria-label="Close shopping bag">×</button>
+      </div>
+      <div class="cart-modal-body">
+        <div class="cart-items" id="cartItems"></div>
+        <div class="cart-subtotal"><span>Order subtotal</span><span id="cartSubtotal">₦0</span></div>
+        <p class="checkout-note">Delivery fee will be confirmed by Suavy Beauty on WhatsApp.</p>
+        <form id="whatsappCheckoutForm">
+          <div class="checkout-fields">
+            <label for="checkoutCustomerName">Your name <input id="checkoutCustomerName" name="customerName" autocomplete="name" required placeholder="Enter your full name" /></label>
+            <label for="checkoutCustomerPhone">Your phone number <input id="checkoutCustomerPhone" name="customerPhone" type="tel" autocomplete="tel" required placeholder="e.g. 08012345678" /></label>
+            <label for="checkoutCustomerAddress">Delivery address <textarea id="checkoutCustomerAddress" name="customerAddress" autocomplete="street-address" required placeholder="House number, street, area and city"></textarea></label>
+            <label for="checkoutOrderNotes">Order notes (optional) <textarea id="checkoutOrderNotes" name="orderNotes" placeholder="Preferred delivery time or other instructions"></textarea></label>
+          </div>
+          <button class="whatsapp-checkout" type="submit"><span aria-hidden="true">☏</span> Checkout via WhatsApp</button>
+          <p class="checkout-note">WhatsApp will open with your order message ready. Please press Send in WhatsApp to submit your order.</p>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Front-end demo: homepage cart creates a WhatsApp order message. No online payment or order database is connected.
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    const WHATSAPP_NUMBER = '2348162756139';
+    const cart = new Map();
+    const naira = amount => new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 }).format(amount);
+    const cartBackdrop = document.getElementById('cartModalBackdrop');
+    const cartItemsElement = document.getElementById('cartItems');
+    const cartSubtotalElement = document.getElementById('cartSubtotal');
+    const checkoutForm = document.getElementById('whatsappCheckoutForm');
+    function cartQuantity() { return Array.from(cart.values()).reduce((sum, item) => sum + item.quantity, 0); }
+    function cartSubtotal() { return Array.from(cart.values()).reduce((sum, item) => sum + item.price * item.quantity, 0); }
+    function updateCartBadge() { const count = cartQuantity(); document.getElementById('cartCount').textContent = count; document.getElementById('cartButton').setAttribute('aria-label', `Shopping bag, ${count} ${count === 1 ? 'item' : 'items'}`); }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('is-visible');
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 3200);
+    }
+
+    // Mobile main navigation
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mainNavWrap = document.getElementById('mainNavWrap');
+    mobileMenuButton.addEventListener('click', () => {
+      const isOpen = mainNavWrap.classList.toggle('is-open');
+      mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
+      mobileMenuButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      document.body.classList.toggle('menu-open', isOpen);
+    });
+    mainNavWrap.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNavWrap.classList.remove('is-open');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      });
+    });
+
+    // Search filters the sample products on this homepage only.
+    const productCards = Array.from(document.querySelectorAll('.product-card'));
+    const emptySearch = document.getElementById('emptySearch');
+    function runProductSearch(value) {
+      const query = value.trim().toLowerCase();
+      let visibleCount = 0;
+      productCards.forEach(card => {
+        const searchText = `${card.dataset.search || ''} ${card.innerText}`.toLowerCase();
+        const isMatch = !query || searchText.includes(query);
+        card.style.display = isMatch ? '' : 'none';
+        if (isMatch) visibleCount++;
+      });
+      emptySearch.style.display = visibleCount ? 'none' : 'block';
+      document.getElementById('featured').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (query && visibleCount === 0) showToast('No featured products found. Try another search.');
+    }
+    const desktopSearchForm = document.getElementById('desktopSearchForm');
+    desktopSearchForm.addEventListener('submit', event => {
+      event.preventDefault();
+      runProductSearch(document.getElementById('desktopSearch').value);
+    });
+
+    // Homepage cart: keeps selected products in memory and sends the order to WhatsApp.
+    function renderCart() {
+      cartItemsElement.innerHTML = '';
+      if (!cart.size) {
+        cartItemsElement.innerHTML = '<p class="cart-empty">Your bag is empty. Add a favourite product to get started.</p>';
+        checkoutForm.style.display = 'none';
+      } else {
+        checkoutForm.style.display = '';
+        cart.forEach((item, name) => {
+          const row = document.createElement('div');
+          row.className = 'cart-line';
+          const details = document.createElement('div');
+          const title = document.createElement('h3'); title.textContent = name;
+          const price = document.createElement('div'); price.className = 'cart-line-price'; price.textContent = naira(item.price * item.quantity);
+          const controls = document.createElement('div'); controls.className = 'cart-line-controls';
+          const minus = document.createElement('button'); minus.type = 'button'; minus.textContent = '−'; minus.setAttribute('aria-label', `Decrease quantity of ${name}`); minus.addEventListener('click', () => changeQuantity(name, -1));
+          const qty = document.createElement('span'); qty.textContent = item.quantity;
+          const plus = document.createElement('button'); plus.type = 'button'; plus.textContent = '+'; plus.setAttribute('aria-label', `Increase quantity of ${name}`); plus.addEventListener('click', () => changeQuantity(name, 1));
+          const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'remove-item'; remove.textContent = 'Remove'; remove.addEventListener('click', () => { cart.delete(name); updateCartBadge(); renderCart(); });
+          controls.append(minus, qty, plus, remove); details.append(title, price, controls); row.append(details); cartItemsElement.append(row);
+        });
+      }
+      cartSubtotalElement.textContent = naira(cartSubtotal());
+    }
+    function changeQuantity(name, delta) { const item = cart.get(name); if (!item) return; item.quantity += delta; if (item.quantity <= 0) cart.delete(name); updateCartBadge(); renderCart(); }
+    function openCart() { renderCart(); cartBackdrop.classList.add('is-open'); cartBackdrop.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; document.getElementById('cartCloseButton').focus(); }
+    function closeCart() { cartBackdrop.classList.remove('is-open'); cartBackdrop.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; document.getElementById('cartButton').focus(); }
+    document.querySelectorAll('.add-to-bag').forEach(button => {
+      button.addEventListener('click', () => {
+        const name = button.dataset.product;
+        const price = Number(button.dataset.price);
+        if (!name || !Number.isFinite(price) || price <= 0) { showToast('This product price is not configured yet.'); return; }
+        const item = cart.get(name) || { price, quantity: 0 };
+        item.quantity += 1; cart.set(name, item); updateCartBadge(); showToast(`${name} added to your bag.`);
+      });
+    });
+    document.getElementById('cartButton').addEventListener('click', openCart);
+    document.getElementById('cartCloseButton').addEventListener('click', closeCart);
+    cartBackdrop.addEventListener('click', event => { if (event.target === cartBackdrop) closeCart(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && cartBackdrop.classList.contains('is-open')) closeCart(); });
+    checkoutForm.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!cart.size) { showToast('Your bag is empty. Add a product before checkout.'); return; }
+      if (!checkoutForm.reportValidity()) return;
+      const form = new FormData(checkoutForm);
+      const lines = Array.from(cart.entries()).map(([name, item]) => `• ${name} × ${item.quantity} — ${naira(item.price * item.quantity)}`);
+      const message = [
+        'Hello Suavy Beauty! I would like to place an order.', '',
+        '*ORDER ITEMS*', ...lines, '',
+        `*Order subtotal: ${naira(cartSubtotal())}*`,
+        'Delivery fee: Please confirm', '',
+        '*CUSTOMER DETAILS*',
+        `Name: ${form.get('customerName')}`,
+        `Phone: ${form.get('customerPhone')}`,
+        `Delivery address: ${form.get('customerAddress')}`,
+        form.get('orderNotes') ? `Order notes: ${form.get('orderNotes')}` : '', '',
+        'Please confirm availability, delivery fee and payment instructions. Thank you!'
+      ].filter(line => line !== undefined).join('\n');
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    });
+
+    // Placeholder social links show a reminder until the client's real accounts are supplied.
+    document.querySelectorAll('.placeholder-link').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        showToast(link.dataset.message || 'This link will be added before launch.');
+      });
+    });
+
+    // Newsletter is display-only until an email service or backend is connected.
+  </script>
+
+  <script>
+    // Supabase configuration
+    const SUPABASE_URL = "https://chgmvkhcpscxxwpsrztz.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_EByS79voOV4fK2df9szkIQ_d8EuaWZC";
+    
+
+    const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+    );
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("#newsletter-form");
+    const emailInput = document.querySelector("#newsletter-email");
+    const message = document.querySelector("#newsletter-message");
+
+    if (!form || !emailInput || !message) {
+      console.error("Newsletter form elements were not found.");
+    return;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+    const email = emailInput.value.trim().toLowerCase();
+
+    if (!emailInput.checkValidity()) {
+      message.textContent = "Please enter a valid email address.";
+    return;
+      }
+
+    const button = form.querySelector('[type="submit"]');
+    if (button) button.disabled = true;
+
+    message.textContent = "Subscribing...";
+
+    try {
+        const {error} = await supabaseClient
+    .from("newsletter_subscribers")
+    .insert([{email}]);
+
+    if (error?.code === "23505") {
+      message.textContent =
+      "This email is already subscribed. Thank you!";
+        } else if (error) {
+          throw error;
+        } else {
+      message.textContent =
+      "Thank you! You have successfully subscribed.";
+    form.reset();
+        }
+      } catch (error) {
+      console.error("Newsletter subscription failed:", error);
+    message.textContent =
+    "We couldn't save your subscription. Please try again.";
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
+
+    // Automatically update the copyright year
+    const yearElement = document.getElementById("currentYear");
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+  });
+</script>
+
+
+  </script>
+  
+</body>
+</html>

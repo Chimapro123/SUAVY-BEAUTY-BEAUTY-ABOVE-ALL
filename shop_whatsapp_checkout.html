@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#801828" />
+  <meta name="description" content="Shop skincare and body-care favourites at Suavy Beauty. Explore Medix 5.5, Anua, Acwell, PanOxyl, SKIN1004 and more." />
+  <title>Shop All Products | Suavy Beauty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --color-primary-red: #801828;
+      --color-soft-pink: #FCE8EA;
+      --color-neutral-beige: #F5EFEB;
+      --color-header-bg: #FFFFFF;
+      --color-text-primary: #1A1A1A;
+      --color-text-secondary: #555555;
+      --color-btn-black: #000000;
+      --color-btn-text: #FFFFFF;
+      --color-border-subtle: #E0E0E0;
+      --color-white: #FFFFFF;
+      --color-champagne: #C8A77B;
+      --shadow-soft: 0 18px 45px rgba(69, 27, 34, 0.09);
+      --radius-card: 12px;
+      --container: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    body { margin: 0; color: var(--color-text-primary); background: var(--color-header-bg); font-family: "DM Sans", Arial, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body.menu-open, body.modal-open { overflow: hidden; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .container { width: min(var(--container), calc(100% - 44px)); margin-inline: auto; }
+    .serif { font-family: "Playfair Display", Georgia, serif; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .announcement { min-height: 34px; display: flex; align-items: center; justify-content: center; padding: 7px 16px; background: var(--color-primary-red); color: #fff; text-align: center; font-size: .72rem; letter-spacing: .055em; }
+    .announcement strong { margin: 0 5px; color: #FFE4D9; }
+    .site-header { position: relative; z-index: 20; background: #fff; }
+    .header-main { display: grid; grid-template-columns: 1fr minmax(220px, 440px) 1fr; align-items: center; gap: 28px; min-height: 94px; }
+    .brand { display: inline-flex; align-items: center; width: max-content; gap: 11px; }
+    .brand-mark { display: grid; place-items: center; flex: 0 0 43px; width: 43px; height: 43px; border: 1px solid var(--color-champagne); border-radius: 50%; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: 1.6rem; font-style: italic; line-height: 1; }
+    .brand-name { display: block; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: 1.45rem; font-weight: 600; line-height: 1.1; letter-spacing: .035em; }
+    .brand-tagline { display: block; margin-top: 5px; color: var(--color-text-secondary); font-size: .58rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .search-form { position: relative; display: flex; height: 45px; border: 1px solid var(--color-border-subtle); border-radius: 3px; background: #fff; }
+    .search-form:focus-within { border-color: var(--color-primary-red); box-shadow: 0 0 0 3px rgba(128,24,40,.08); }
+    .search-form input { width: 100%; min-width: 0; border: 0; outline: 0; padding: 0 14px; background: transparent; color: var(--color-text-primary); font-size: .86rem; }
+    .search-form input::placeholder { color: #888; }
+    .search-form button { display: grid; place-items: center; width: 48px; flex: 0 0 48px; border: 0; background: transparent; color: var(--color-primary-red); }
+    .search-form svg { width: 19px; height: 19px; }
+    .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+    .icon-action { display: inline-flex; align-items: center; gap: 8px; padding: 6px 0; border: 0; background: transparent; color: var(--color-text-primary); font-size: .8rem; }
+    .icon-action svg { width: 21px; height: 21px; stroke-width: 1.6; }
+    .cart-count { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 4px; margin-left: -5px; border-radius: 50%; background: var(--color-primary-red); color: #fff; font-size: .65rem; }
+    .main-nav-wrap { border-top: 1px solid #f0e9e7; border-bottom: 1px solid var(--color-border-subtle); }
+    .main-nav { display: flex; align-items: center; justify-content: center; gap: clamp(16px, 2.8vw, 36px); min-height: 48px; }
+    .main-nav a { padding: 13px 0; color: #292323; font-size: .77rem; font-weight: 700; letter-spacing: .025em; transition: color .2s ease; }
+    .main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--color-primary-red); }
+    .category-nav { border-bottom: 1px solid #f3efed; background: #fff; }
+    .category-nav .container { display: flex; justify-content: center; align-items: center; gap: clamp(15px, 2.15vw, 28px); min-height: 43px; overflow-x: auto; scrollbar-width: none; }
+    .category-nav .container::-webkit-scrollbar { display: none; }
+    .category-nav a { flex: 0 0 auto; padding: 11px 0; color: var(--color-text-secondary); font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+    .category-nav a:hover, .category-nav a[aria-current="page"] { color: var(--color-primary-red); }
+    .mobile-menu-button { display: none; border: 1px solid var(--color-border-subtle); border-radius: 4px; padding: 9px; background: #fff; color: var(--color-primary-red); }
+    .mobile-menu-button svg { display: block; width: 22px; height: 22px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--color-primary-red); font-size: .73rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 25px; height: 1px; background: var(--color-champagne); }
+    .btn { display: inline-flex; justify-content: center; align-items: center; gap: 10px; min-height: 47px; padding: 0 22px; border: 1px solid transparent; border-radius: 2px; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; transition: transform .2s ease, background .2s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-dark { background: #000; color: #fff; }
+    .btn-dark:hover { background: var(--color-primary-red); }
+    .btn-outline { border-color: rgba(128,24,40,.35); background: transparent; color: var(--color-primary-red); }
+
+    /* Shop introduction */
+    .shop-hero { overflow: hidden; background: var(--color-soft-pink); }
+    .shop-hero-inner { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 40px; min-height: 270px; padding-top: 42px; padding-bottom: 42px; }
+    .shop-hero h1 { max-width: 650px; margin: 13px 0 12px; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 500; letter-spacing: -.055em; line-height: 1.02; }
+    .shop-hero h1 em { color: var(--color-text-primary); font-weight: 500; }
+    .shop-hero p { max-width: 520px; margin: 0; color: #53474a; font-size: .96rem; line-height: 1.85; }
+    .hero-art { position: relative; display: grid; place-items: center; min-height: 180px; }
+    .hero-art::before, .hero-art::after { content: ""; position: absolute; border: 1px solid rgba(128,24,40,.18); border-radius: 50%; }
+    .hero-art::before { width: 240px; height: 240px; }
+    .hero-art::after { width: 190px; height: 190px; }
+    .hero-art-icon { position: relative; z-index: 1; display: grid; place-items: center; width: 135px; height: 135px; border-radius: 50%; background: rgba(255,255,255,.75); color: var(--color-primary-red); box-shadow: 0 15px 35px rgba(69,27,34,.08); }
+    .hero-art-icon svg { width: 62px; height: 62px; }
+    .shop-benefits { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--color-border-subtle); }
+    .benefit { display: flex; align-items: center; justify-content: center; gap: 11px; padding: 17px 10px; border-right: 1px solid #eee8e6; }
+    .benefit:last-child { border-right: 0; }
+    .benefit-icon { color: var(--color-primary-red); font-size: 1.25rem; }
+    .benefit strong { display: block; font-size: .76rem; }
+    .benefit span:last-child { display: block; color: var(--color-text-secondary); font-size: .68rem; }
+
+    /* Product listing */
+    .shop-section { padding: 62px 0 84px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 25px; }
+    .section-heading h2 { margin: 9px 0 0; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: clamp(2rem, 3.5vw, 2.9rem); font-weight: 500; letter-spacing: -.04em; line-height: 1.15; }
+    .section-heading p { max-width: 430px; margin: 9px 0 0; color: var(--color-text-secondary); font-size: .9rem; }
+    .product-count { flex: 0 0 auto; color: var(--color-text-secondary); font-size: .78rem; }
+    .shop-controls { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin: 28px 0 23px; }
+    .filter-list { display: flex; gap: 8px; max-width: 100%; overflow-x: auto; padding: 3px 1px 7px; scrollbar-width: thin; }
+    .filter-chip { flex: 0 0 auto; padding: 9px 14px; border: 1px solid #e8dfdc; border-radius: 2px; background: #fff; color: #564a4b; font-size: .72rem; font-weight: 700; transition: color .2s, background .2s, border-color .2s; }
+    .filter-chip:hover, .filter-chip.is-active { border-color: var(--color-primary-red); background: var(--color-primary-red); color: #fff; }
+    .sort-select { min-height: 40px; padding: 0 34px 0 12px; border: 1px solid var(--color-border-subtle); border-radius: 2px; background: #fff; color: var(--color-text-primary); font-size: .77rem; }
+    .mobile-search { display: none; margin-bottom: 18px; }
+    .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 17px; }
+    .product-card { position: relative; min-width: 0; overflow: hidden; border: 1px solid #eee6e3; border-radius: 9px; background: #fff; transition: box-shadow .25s ease, transform .25s ease; }
+    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+    .product-image-wrap { position: relative; overflow: hidden; aspect-ratio: 1 / 1.04; background: #f8f1ef; }
+    .product-image-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 8px; transition: transform .4s ease; }
+    .product-card:hover .product-image-wrap img { transform: scale(1.035); }
+    .image-fallback { position: absolute; inset: 0; display: none; place-items: center; padding: 22px; background: linear-gradient(145deg, #f8eeeb, #f3dadd); color: var(--color-primary-red); text-align: center; }
+    .image-fallback.is-visible { display: grid; }
+    .image-fallback svg { width: 43px; height: 43px; margin: 0 auto 12px; }
+    .image-fallback span { display: block; font-family: "Playfair Display", Georgia, serif; font-size: 1rem; line-height: 1.35; }
+    .product-badge { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 6px 9px; border-radius: 2px; background: #fff; color: var(--color-primary-red); font-size: .6rem; font-weight: 700; letter-spacing: .045em; text-transform: uppercase; box-shadow: 0 3px 12px rgba(0,0,0,.05); }
+    .product-badge.best { background: var(--color-primary-red); color: #fff; }
+    .quick-view { position: absolute; right: 11px; bottom: 11px; z-index: 2; padding: 8px 10px; border: 0; border-radius: 2px; background: rgba(255,255,255,.94); color: var(--color-primary-red); font-size: .65rem; font-weight: 700; box-shadow: 0 3px 12px rgba(0,0,0,.08); opacity: 0; transform: translateY(5px); transition: .2s ease; }
+    .product-card:hover .quick-view, .quick-view:focus-visible { opacity: 1; transform: translateY(0); }
+    .product-info { padding: 15px 14px 15px; }
+    .product-category { margin: 0 0 6px; color: #947c7e; font-size: .62rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+    .product-title { min-height: 50px; margin: 0; font-size: .86rem; font-weight: 600; line-height: 1.5; }
+    .product-volume { min-height: 17px; margin-top: 4px; color: var(--color-text-secondary); font-size: .71rem; }
+    .product-price { margin: 10px 0 13px; color: var(--color-primary-red); font-size: .98rem; font-weight: 700; }
+    .card-actions { display: grid; grid-template-columns: 1fr 42px; gap: 7px; }
+    .add-to-bag { display: flex; justify-content: center; align-items: center; gap: 7px; min-width: 0; min-height: 41px; padding: 0 9px; border: 1px solid var(--color-primary-red); border-radius: 2px; background: var(--color-primary-red); color: #fff; font-size: .65rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; transition: background .2s ease, color .2s ease; }
+    .add-to-bag:hover { background: #5e101d; }
+    .add-to-bag svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .details-button { display: grid; place-items: center; min-height: 41px; border: 1px solid var(--color-border-subtle); background: white; color: var(--color-primary-red); }
+    .details-button:hover { border-color: var(--color-primary-red); background: var(--color-soft-pink); }
+    .details-button svg { width: 18px; height: 18px; }
+    .no-results { display: none; grid-column: 1 / -1; padding: 50px 20px; border: 1px dashed var(--color-border-subtle); text-align: center; color: var(--color-text-secondary); }
+    .no-results strong { display: block; margin-bottom: 6px; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: 1.5rem; }
+    .disclaimer { margin: 24px 0 0; color: #777; font-size: .73rem; line-height: 1.7; }
+
+    /* Simple category banner */
+    .shop-banner { padding: 0 0 78px; }
+    .shop-banner-inner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 25px; padding: clamp(26px, 4vw, 46px); border: 1px solid #eadbd8; background: #fcf8f6; }
+    .shop-banner h2 { margin: 0 0 8px; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: clamp(1.6rem, 3vw, 2.35rem); font-weight: 500; letter-spacing: -.03em; }
+    .shop-banner p { max-width: 650px; margin: 0; color: var(--color-text-secondary); font-size: .88rem; }
+
+    /* Footer */
+    .site-footer { background: #241a1b; color: #fff; }
+    .footer-main { display: grid; grid-template-columns: 1.4fr .8fr .8fr 1fr; gap: 42px; padding: 58px 0 45px; }
+    .footer-brand .brand-name { color: #fff; }
+    .footer-brand .brand-tagline { color: #d8caca; }
+    .footer-brand .brand-mark { color: #f5d3d5; border-color: var(--color-champagne); }
+    .footer-brand p { max-width: 280px; margin: 18px 0 0; color: #d5c9c9; font-size: .85rem; }
+    .footer-column h3 { margin: 0 0 17px; color: #f5d3d5; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; }
+    .footer-column a { display: block; width: max-content; max-width: 100%; margin: 10px 0; color: #ded4d4; font-size: .82rem; transition: color .2s ease; }
+    .footer-column a:hover { color: #fff; }
+    .footer-note { max-width: 320px; color: #d5c9c9; font-size: .82rem; }
+    .social-row { display: flex; gap: 10px; margin-top: 17px; }
+    .social-link { display: grid !important; place-items: center; width: 38px; height: 38px; margin: 0 !important; border: 1px solid #6e5b5e; border-radius: 50%; color: #fff !important; }
+    .social-link svg { width: 17px; height: 17px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 17px 0; border-top: 1px solid #514144; color: #bcaeaf; font-size: .72rem; }
+    .footer-bottom p { margin: 0; }
+    .footer-bottom a { color: #e4d6d7; }
+
+    /* Product quick-view modal */
+    .modal-backdrop { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(25,13,15,.62); }
+    .modal-backdrop.is-open { display: flex; }
+    .product-modal { position: relative; width: min(850px, 100%); max-height: min(88vh, 850px); overflow-y: auto; border-radius: 8px; background: #fff; box-shadow: 0 25px 90px rgba(0,0,0,.25); }
+    .modal-close { position: sticky; top: 12px; z-index: 4; float: right; display: grid; place-items: center; width: 38px; height: 38px; margin: 12px 12px -50px 0; border: 1px solid var(--color-border-subtle); border-radius: 50%; background: #fff; color: #251a1c; font-size: 1.3rem; }
+    .modal-grid { display: grid; grid-template-columns: .9fr 1.1fr; }
+    .modal-image { position: relative; min-height: 430px; background: #f8f1ef; }
+    .modal-image img { width: 100%; height: 100%; min-height: 430px; padding: 24px; object-fit: contain; }
+    .modal-copy { padding: 40px 32px 32px; }
+    .modal-copy .product-category { margin-bottom: 8px; }
+    .modal-copy h2 { margin: 0 0 12px; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: clamp(1.6rem, 3vw, 2.25rem); font-weight: 500; line-height: 1.2; }
+    .modal-price { margin: 0 0 18px; color: var(--color-primary-red); font-size: 1.2rem; font-weight: 700; }
+    .modal-description { color: var(--color-text-secondary); font-size: .88rem; line-height: 1.8; white-space: pre-line; }
+    .detail-block { margin-top: 19px; padding-top: 16px; border-top: 1px solid #eee6e3; }
+    .detail-block h3 { margin: 0 0 8px; color: var(--color-text-primary); font-size: .79rem; letter-spacing: .07em; text-transform: uppercase; }
+    .detail-block p, .detail-block ul { margin: 0; padding-left: 0; color: var(--color-text-secondary); font-size: .82rem; line-height: 1.8; }
+    .detail-block ul { padding-left: 18px; }
+    .modal-add { width: 100%; margin-top: 22px; }
+    .modal-note { margin: 14px 0 0; color: #777; font-size: .72rem; line-height: 1.65; }
+    /* Shopping bag and WhatsApp checkout */
+    .cart-modal { position: relative; width: min(760px, 100%); max-height: min(90vh, 900px); overflow-y: auto; padding: clamp(22px, 4vw, 38px); border-radius: 8px; background: #fff; box-shadow: 0 25px 90px rgba(0,0,0,.25); }
+    .cart-modal .modal-close { position: absolute; top: 10px; right: 10px; margin: 0; }
+    .cart-modal h2 { margin: 8px 42px 7px 0; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: clamp(1.8rem, 4vw, 2.45rem); font-weight: 500; line-height: 1.15; }
+    .cart-intro { margin: 0 0 22px; color: var(--color-text-secondary); font-size: .85rem; }
+    .cart-items { display: grid; gap: 0; border-top: 1px solid #eee5e3; }
+    .cart-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: center; padding: 16px 0; border-bottom: 1px solid #eee5e3; }
+    .cart-item-title { margin: 0 0 4px; color: var(--color-text-primary); font-size: .88rem; font-weight: 700; line-height: 1.45; }
+    .cart-item-unit { color: var(--color-text-secondary); font-size: .78rem; }
+    .cart-item-controls { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
+    .quantity-control { display: inline-flex; align-items: center; border: 1px solid var(--color-border-subtle); }
+    .quantity-control button { display: grid; place-items: center; width: 31px; height: 32px; border: 0; background: #fff; color: var(--color-primary-red); font-size: 1.1rem; }
+    .quantity-control button:hover { background: var(--color-soft-pink); }
+    .quantity-value { min-width: 28px; text-align: center; font-size: .82rem; font-weight: 700; }
+    .cart-line-total { min-width: 95px; color: var(--color-primary-red); text-align: right; font-size: .86rem; font-weight: 700; }
+    .cart-remove { padding: 4px 0; border: 0; background: transparent; color: #8a6268; font-size: .72rem; text-decoration: underline; }
+    .cart-empty { padding: 28px 14px; color: var(--color-text-secondary); text-align: center; }
+    .cart-empty strong { display: block; margin-bottom: 5px; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: 1.45rem; }
+    .cart-summary { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 19px 0 8px; }
+    .cart-summary span { font-size: .9rem; font-weight: 600; }
+    .cart-summary strong { color: var(--color-primary-red); font-size: 1.2rem; }
+    .cart-note { margin: 4px 0 22px; color: var(--color-text-secondary); font-size: .75rem; line-height: 1.6; }
+    .checkout-divider { margin: 20px 0 18px; border: 0; border-top: 1px solid #eee5e3; }
+    .checkout-heading { margin: 0 0 12px; color: var(--color-primary-red); font-size: .83rem; letter-spacing: .08em; text-transform: uppercase; }
+    .checkout-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .checkout-field { display: grid; gap: 6px; }
+    .checkout-field.full-width { grid-column: 1 / -1; }
+    .checkout-field label { color: #3f3436; font-size: .76rem; font-weight: 700; }
+    .checkout-field input, .checkout-field textarea { width: 100%; min-height: 43px; padding: 10px 12px; border: 1px solid var(--color-border-subtle); border-radius: 2px; outline: 0; background: #fff; color: var(--color-text-primary); font: inherit; font-size: .84rem; }
+    .checkout-field textarea { min-height: 76px; resize: vertical; }
+    .checkout-field input:focus, .checkout-field textarea:focus { border-color: var(--color-primary-red); box-shadow: 0 0 0 3px rgba(128,24,40,.08); }
+    .checkout-submit { width: 100%; margin-top: 18px; background: #167546; color: #fff; }
+    .checkout-submit:hover { background: #105c36; }
+    .checkout-submit:disabled { opacity: .48; cursor: not-allowed; transform: none; }
+    .checkout-disclaimer { margin: 10px 0 0; color: #777; font-size: .7rem; line-height: 1.6; }
+    .cart-continue { width: 100%; margin-top: 10px; }
+    @media (max-width: 560px) {
+      .cart-item { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+      .cart-item-controls { justify-content: space-between; }
+      .cart-line-total { min-width: auto; text-align: left; }
+      .checkout-fields { grid-template-columns: 1fr; }
+      .checkout-field.full-width { grid-column: auto; }
+    }
+    .toast { position: fixed; z-index: 150; right: 22px; bottom: 22px; max-width: min(380px, calc(100% - 44px)); padding: 14px 18px; border-radius: 7px; background: #241a1b; color: #fff; box-shadow: 0 10px 35px rgba(0,0,0,.2); font-size: .85rem; opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .25s ease, transform .25s ease; }
+    .toast.is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1050px) {
+      .header-main { grid-template-columns: 1fr minmax(190px, 1fr) auto; gap: 16px; }
+      .header-actions { gap: 12px; }
+      .main-nav { gap: 22px; }
+      .category-nav .container { justify-content: flex-start; }
+      .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .footer-main { grid-template-columns: 1.2fr .8fr .8fr; }
+      .footer-main > :last-child { grid-column: 1 / -1; }
+    }
+    @media (max-width: 760px) {
+      .container { width: min(var(--container), calc(100% - 32px)); }
+      .announcement { font-size: .63rem; }
+      .header-main { display: flex; min-height: 76px; gap: 12px; }
+      .mobile-menu-button { display: inline-grid; place-items: center; flex: 0 0 auto; }
+      .brand { margin-right: auto; gap: 8px; }
+      .brand-mark { width: 37px; height: 37px; flex-basis: 37px; font-size: 1.35rem; }
+      .brand-name { font-size: 1.12rem; }
+      .brand-tagline { font-size: .5rem; letter-spacing: .08em; }
+      .header-main > .search-form { display: none; }
+      .header-actions { gap: 10px; }
+      .icon-action { gap: 4px; font-size: .72rem; }
+      .icon-action svg { width: 19px; height: 19px; }
+      .action-label { display: none; }
+      .main-nav-wrap { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 30; border-top: 1px solid var(--color-border-subtle); background: #fff; box-shadow: 0 15px 25px rgba(0,0,0,.08); }
+      .main-nav-wrap.is-open { display: block; }
+      .main-nav { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 10px 22px; }
+      .main-nav a { padding: 13px 0; border-bottom: 1px solid #f2eceb; font-size: .83rem; }
+      .main-nav a:last-child { border-bottom: 0; }
+      .category-nav .container { min-height: 41px; gap: 21px; }
+      .category-nav a { font-size: .64rem; }
+      .shop-hero-inner { grid-template-columns: 1fr; gap: 12px; padding-top: 37px; padding-bottom: 26px; }
+      .shop-hero h1 { font-size: clamp(2.65rem, 12vw, 4rem); }
+      .hero-art { min-height: 135px; }
+      .hero-art::before { width: 155px; height: 155px; }
+      .hero-art::after { width: 125px; height: 125px; }
+      .hero-art-icon { width: 92px; height: 92px; }
+      .hero-art-icon svg { width: 43px; height: 43px; }
+      .shop-benefits { grid-template-columns: 1fr; }
+      .benefit { justify-content: flex-start; padding: 13px 18px; border-right: 0; border-bottom: 1px solid #eee8e6; }
+      .benefit:last-child { border-bottom: 0; }
+      .shop-section { padding: 46px 0 60px; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 10px; }
+      .shop-controls { flex-direction: column; align-items: stretch; gap: 12px; }
+      .sort-select { width: 100%; }
+      .mobile-search { display: flex; }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px 10px; }
+      .product-info { padding: 12px 10px; }
+      .product-title { min-height: 65px; font-size: .8rem; }
+      .product-price { font-size: .92rem; }
+      .product-badge { top: 8px; left: 8px; padding: 5px 6px; font-size: .53rem; }
+      .quick-view { right: 7px; bottom: 7px; padding: 7px 8px; font-size: .6rem; opacity: 1; transform: none; }
+      .add-to-bag { font-size: .58rem; padding: 0 4px; min-height: 39px; letter-spacing: .015em; }
+      .card-actions { grid-template-columns: minmax(0, 1fr) 36px; gap: 5px; }
+      .details-button { min-height: 39px; }
+      .shop-banner { padding-bottom: 55px; }
+      .shop-banner-inner { grid-template-columns: 1fr; }
+      .shop-banner-inner .btn { width: 100%; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 30px 20px; padding: 42px 0 32px; }
+      .footer-main > :first-child, .footer-main > :last-child { grid-column: 1 / -1; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; gap: 6px; }
+      .modal-backdrop { padding: 10px; }
+      .product-modal { max-height: 94vh; }
+      .modal-grid { grid-template-columns: 1fr; }
+      .modal-image, .modal-image img { min-height: 0; height: 250px; }
+      .modal-copy { padding: 25px 22px 24px; }
+      .modal-copy h2 { padding-right: 8px; }
+      .modal-close { position: absolute; right: 0; top: 0; margin: 10px; }
+    }
+    @media (max-width: 390px) {
+      .container { width: calc(100% - 26px); }
+      .brand-name { font-size: 1rem; }
+      .header-main { gap: 8px; }
+      .mobile-menu-button { padding: 7px; }
+      .product-title { font-size: .76rem; }
+      .add-to-bag { font-size: .53rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">YOUR BEAUTY ROUTINE, MADE SIMPLE <strong>•</strong> Authentic beauty essentials, selected with care</div>
+
+  <header class="site-header">
+    <div class="container header-main">
+      <button class="mobile-menu-button" id="mobileMenuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNavWrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </button>
+      <a class="brand" href="index.html" aria-label="Suavy Beauty homepage">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span><span class="brand-name">SUAVY BEAUTY</span><span class="brand-tagline">Healthy skin. Soft glow.</span></span>
+      </a>
+      <form class="search-form" id="desktopSearchForm" role="search">
+        <label class="sr-only" for="desktopSearch">Search products</label>
+        <input id="desktopSearch" type="search" placeholder="Search skincare, brands and more..." autocomplete="off" />
+        <button type="submit" aria-label="Search products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></button>
+      </form>
+      <div class="header-actions">
+        <a class="icon-action" href="account.html" aria-label="My account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.5-3.5 3.2-5.5 7-5.5s6.5 2 7 5.5"/></svg><span class="action-label">Account</span></a>
+        <button class="icon-action" id="cartButton" type="button" aria-label="Shopping bag, 0 items"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span class="action-label">Bag</span><span class="cart-count" id="cartCount">0</span></button>
+      </div>
+    </div>
+    <div class="main-nav-wrap" id="mainNavWrap">
+      <nav class="main-nav container" aria-label="Main navigation">
+        <a href="index.html">Home</a><a href="about.html">About Us</a><a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+    <nav class="category-nav" aria-label="Shop categories">
+      <div class="container">
+        <a href="shop.html" aria-current="page">Shop All</a><a href="brands.html">Brands</a><a href="for-women.html">For Women</a><a href="skincare.html">Skincare</a><a href="sunscreen.html">Sunscreen</a><a href="bath-body.html">Bath &amp; Body</a><a href="face.html">Face</a><a href="oils-serums.html">Oils &amp; Serums</a><a href="treatments.html">Treatments</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="shop-hero" aria-labelledby="shopTitle">
+      <div class="container shop-hero-inner">
+        <div>
+          <span class="eyebrow">The Suavy edit</span>
+          <h1 id="shopTitle">Find your next <em>favourite.</em></h1>
+          <p>Explore skincare and body-care essentials for your everyday routine. Discover customer favourites, nourishing body creams, targeted serums, cleansers and more.</p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-art-icon"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 13h20M25 13V8h14v5M21 20h22l4 35H17l4-35Z"/><path d="M23 28h18M25 35h14"/><path d="M32 24c-2-5-9-3-7 2 1 3 7 7 7 7s6-4 7-7c2-5-5-7-7-2Z" fill="#FCE8EA"/></svg></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container shop-benefits" aria-label="Shopping highlights">
+      <div class="benefit"><span class="benefit-icon" aria-hidden="true">✦</span><div><strong>Thoughtful beauty finds</strong><span>Essentials for your routine</span></div></div>
+      <div class="benefit"><span class="benefit-icon" aria-hidden="true">♡</span><div><strong>Easy browsing</strong><span>Find products by type or name</span></div></div>
+      <div class="benefit"><span class="benefit-icon" aria-hidden="true">✧</span><div><strong>Need a hand?</strong><span><a href="contact.html">Contact our team</a></span></div></div>
+    </div>
+
+    <section class="shop-section" id="products" aria-labelledby="productsHeading">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="eyebrow">Shop the collection</span><h2 id="productsHeading">Skincare &amp; body care</h2><p>Browse the current collection and open any product to see more details.</p></div>
+          <div class="product-count" id="productCount" aria-live="polite">8 products</div>
+        </div>
+
+        <form class="search-form mobile-search" id="mobileSearchForm" role="search">
+          <label class="sr-only" for="mobileSearch">Search products</label><input id="mobileSearch" type="search" placeholder="Search by product or brand..." autocomplete="off" />
+          <button type="submit" aria-label="Search products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></button>
+        </form>
+
+        <div class="shop-controls">
+          <div class="filter-list" id="filterList" role="group" aria-label="Filter products">
+            <button class="filter-chip is-active" type="button" data-filter="all" aria-pressed="true">All products</button>
+            <button class="filter-chip" type="button" data-filter="best" aria-pressed="false">Best sellers</button>
+            <button class="filter-chip" type="button" data-filter="body" aria-pressed="false">Body care</button>
+            <button class="filter-chip" type="button" data-filter="serums" aria-pressed="false">Serums &amp; oils</button>
+            <button class="filter-chip" type="button" data-filter="cleanse" aria-pressed="false">Cleansers</button>
+            <button class="filter-chip" type="button" data-filter="toner" aria-pressed="false">Toners</button>
+          </div>
+          <label><span class="sr-only">Sort products</span><select class="sort-select" id="sortSelect"><option value="featured">Sort: Featured</option><option value="price-low">Price: Low to high</option><option value="price-high">Price: High to low</option><option value="name">Name: A to Z</option></select></label>
+        </div>
+
+        <div class="product-grid" id="productGrid" aria-live="polite"></div>
+        <p class="disclaimer">Product descriptions and directions are provided as general product information. Always read the product packaging, follow the manufacturer's instructions, and check the current ingredient list before use. Prices and stock should be confirmed before the store goes live.</p>
+      </div>
+    </section>
+
+    <section class="shop-banner">
+      <div class="container shop-banner-inner">
+        <div><h2>Need help finding the right product?</h2><p>Send Suavy Beauty a message for assistance with product details and your shopping questions. We can help you explore the available collection.</p></div>
+        <a class="btn btn-dark" href="contact.html">Contact us <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Suavy Beauty home"><span class="brand-mark" aria-hidden="true">S</span><span><span class="brand-name">SUAVY BEAUTY</span><span class="brand-tagline">Healthy skin. Soft glow.</span></span></a>
+        <p>Authentic and affordable skincare and beauty essentials, chosen to make shopping feel simple.</p>
+        <div class="social-row"><a class="social-link placeholder-link" href="#" aria-label="Instagram" data-message="Suavy Beauty's Instagram link will be added when available."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r=".8" fill="currentColor"/></svg></a><a class="social-link" href="https://wa.me/2348162756139" target="_blank" rel="noopener" aria-label="WhatsApp Suavy Beauty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 8.7 4a8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.4Z"/><path d="M9 8.7c.3-.7.7-.7 1-.7l.6.1c.2 0 .3.2.4.5l.6 1.4c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4 0 .6.4.7 1.1 1.3 1.8 1.7.3.2.5.2.7-.1l.7-.8c.2-.2.4-.2.7-.1l1.3.6c.3.1.4.3.4.5 0 .3-.2.9-.6 1.2-.4.4-1.2.6-1.9.5-.8-.1-1.9-.6-3.1-1.7-1.4-1.3-2-2.5-2.2-3.4-.2-.8.1-1.3.2-1.5Z"/></svg></a></div>
+      </div>
+      <div class="footer-column"><h3>Explore</h3><a href="index.html">Home</a><a href="about.html">About Suavy</a><a href="shop.html">Shop all products</a><a href="brands.html">Our brands</a></div>
+      <div class="footer-column"><h3>Customer care</h3><a href="contact.html">Contact us</a><a href="delivery.html">Delivery information</a><a href="returns.html">Returns &amp; refunds</a><a href="privacy.html">Privacy policy</a></div>
+      <div class="footer-column"><h3>Beauty notes</h3><p class="footer-note">Get updates about new arrivals and special offers. Newsletter sign-up will be connected when the website backend is added.</p><form id="newsletterForm" class="search-form" style="margin-top:15px" aria-label="Newsletter signup"><label class="sr-only" for="newsletterEmail">Email address</label><input id="newsletterEmail" type="email" placeholder="Your email address" required /><button type="submit" aria-label="Sign up for beauty updates"><span aria-hidden="true">→</span></button></form></div>
+    </div>
+    <div class="container footer-bottom"><p>© <span id="currentYear">2026</span> Suavy Beauty. All rights reserved.</p><p>Healthy skin. Soft glow. Authentic and affordable.</p></div>
+  </footer>
+
+  <div class="modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="product-modal">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close product details">×</button>
+      <div class="modal-grid">
+        <div class="modal-image" id="modalImageWrap"><img id="modalImage" src="" alt="" /><div class="image-fallback" id="modalImageFallback"><div><span>Product image coming soon</span></div></div></div>
+        <div class="modal-copy">
+          <p class="product-category" id="modalCategory"></p><h2 id="modalTitle"></h2><p class="modal-price" id="modalPrice"></p><div class="modal-description" id="modalDescription"></div>
+          <div class="detail-block" id="usageBlock"><h3>How to use</h3><div id="modalUsage"></div></div>
+          <div class="detail-block" id="ingredientsBlock"><h3>Ingredients</h3><p id="modalIngredients"></p></div>
+          <button class="btn btn-dark modal-add" id="modalAddToBag" type="button">Add to bag</button>
+          <p class="modal-note">Please follow the directions on the original product packaging. Ingredient lists may change; verify the packaging before use.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop" id="cartModal" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+    <section class="cart-modal">
+      <button class="modal-close" id="cartClose" type="button" aria-label="Close shopping bag">×</button>
+      <span class="eyebrow">Your selection</span>
+      <h2 id="cartTitle">Your shopping bag</h2>
+      <p class="cart-intro">Review your products and quantities before sending your order to Suavy Beauty on WhatsApp.</p>
+      <div class="cart-items" id="cartItems"></div>
+      <div class="cart-summary"><span>Products subtotal</span><strong id="cartSubtotal">₦0</strong></div>
+      <p class="cart-note">Delivery fees and product availability will be confirmed by Suavy Beauty on WhatsApp. The subtotal above does not include delivery charges.</p>
+      <hr class="checkout-divider" />
+      <h3 class="checkout-heading">Delivery details</h3>
+      <form id="checkoutForm">
+        <div class="checkout-fields">
+          <div class="checkout-field">
+            <label for="customerName">Your full name *</label>
+            <input id="customerName" name="customerName" type="text" autocomplete="name" maxlength="100" required placeholder="Enter your name" />
+          </div>
+          <div class="checkout-field">
+            <label for="customerPhone">Phone number (optional)</label>
+            <input id="customerPhone" name="customerPhone" type="tel" autocomplete="tel" maxlength="30" placeholder="e.g. 0801 234 5678" />
+          </div>
+          <div class="checkout-field full-width">
+            <label for="deliveryAddress">Delivery address and area *</label>
+            <textarea id="deliveryAddress" name="deliveryAddress" autocomplete="street-address" maxlength="500" required placeholder="House/street, area, city"></textarea>
+          </div>
+          <div class="checkout-field full-width">
+            <label for="orderNotes">Order notes (optional)</label>
+            <textarea id="orderNotes" name="orderNotes" maxlength="500" placeholder="Preferred delivery time or other details"></textarea>
+          </div>
+        </div>
+        <button class="btn checkout-submit" id="checkoutButton" type="submit">Checkout via WhatsApp <span aria-hidden="true">↗</span></button>
+        <p class="checkout-disclaimer">WhatsApp will open with your order message ready to review. Your order is not sent until you press Send in WhatsApp. No online payment is taken on this page.</p>
+        <button class="btn btn-outline cart-continue" id="continueShopping" type="button">Continue shopping</button>
+      </form>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Product information supplied for the Suavy Beauty starter storefront.
+    // Image paths are relative to this HTML file. Put the image files in the folders shown in the project notes.
+    const products = [
+      {
+        id: 1, name: 'Medix 5.5 Vitamin C + Turmeric Body Treatment Cream', brand: 'Medix 5.5', category: 'Body care', filter: 'body', price: 24500, image: 'images/sopprod1.PNG', best: false, volume: '',
+        description: 'A rich body moisturizer formulated with Vitamin C and turmeric to help brighten dull-looking skin, improve the appearance of uneven skin tone and texture, and leave your skin feeling softer, smoother, and nourished.',
+        usage: 'Apply to clean, dry skin as directed on the product packaging. Avoid contact with eyes and discontinue use if irritation occurs.', ingredients: 'Please refer to the current product label for the full ingredient list.'
+      },
+      {
+        id: 2, name: 'Medix 5.5 Niacinamide + Shea Butter Body Cream', brand: 'Medix 5.5', category: 'Body care', filter: 'body', price: 24500, image: 'images/sopprod2.PNG', best: false, volume: '444 ml',
+        description: 'A body cream featuring niacinamide and shea butter. Made for everyday body-care routines, it helps moisturize the skin and leave it feeling soft and comfortable.',
+        usage: 'Apply to clean, dry skin as directed on the product packaging. Patch test before first use if you have sensitive skin.', ingredients: 'Please refer to the current product label for the full ingredient list.'
+      },
+      {
+        id: 3, name: 'Anua Niacinamide 10% + TXA 4% Serum', brand: 'Anua', category: 'Serums', filter: 'serums', price: 35000, image: 'bestseller/bestseller1.webp', best: true, volume: '30 ml',
+        description: 'A targeted serum intended to improve the appearance of dark spots, hyperpigmentation and uneven-looking skin tone. The lightweight formula provides hydration and leaves skin feeling smooth and refreshed. Check the original packaging for the official product description and current formulation.',
+        usage: 'After cleansing and toning, apply a few drops to the face and gently spread over the skin. Follow with moisturizer and sunscreen during the day. Introduce new skincare gradually and follow the product label.', ingredients: 'The ingredient list supplied for this listing should be verified against the product packaging before publication: Water, Niacinamide, Ascorbic Acid (Vitamin C), Glycerin, Butylene Glycol, Sodium Hyaluronate, Cetearyl Alcohol, Glyceryl Stearate, Propylene Glycol, Panthenol (Vitamin B5), Aloe Vera Extract, Allantoin, Fragrance, Phenoxyethanol, Ethylhexylglycerin, Disodium EDTA.'
+      },
+      {
+        id: 4, name: 'Alpha Arbutin Collagen Soap', brand: 'Suavy Beauty selection', category: 'Cleansers', filter: 'cleanse', price: 6000, image: 'bestseller/bestseller2.webp', best: true, volume: '',
+        description: 'A cleansing bar formulated with alpha arbutin and collagen. The product is marketed for helping improve the appearance of uneven skin tone and skin texture. Use according to the packaging directions.',
+        usage: 'Lather on wet skin, massage gently for about 30 seconds, then rinse thoroughly. Avoid the eyes. Stop using if irritation occurs.', ingredients: 'Sodium Palmate, Sodium Palm Kernelate, Alpha-Arbutin, Hydrolyzed Collagen, Glycerin, Citric Acid, CI 77891 (Titanium Dioxide). Verify this list against the current package.'
+      },
+      {
+        id: 5, name: 'Advanced Korean Skin Brightest Body Oil', brand: 'Korean skincare', category: 'Body care', filter: 'body', price: 17500, image: 'bestseller/bestseller3.jpg', best: true, volume: '',
+        description: 'A body oil for adding a nourishing step to your body-care routine. Use the original packaging to confirm the product’s exact claims, ingredients and intended skin type.',
+        usage: 'Use according to the directions on the product packaging. If applying for the first time, test on a small area of skin first.', ingredients: 'Please refer to the current product label for the full ingredient list.'
+      },
+      {
+        id: 6, name: 'Acwell Licorice pH Balancing Cleansing Toner', brand: 'Acwell', category: 'Toners', filter: 'toner', price: 20500, image: 'bestseller/bestseller4.jpg', best: true, volume: '150 ml',
+        description: 'A skin-refining toner described as helping hydrate and improve the appearance of uneven skin tone. The supplied product information mentions licorice root, peony and green tea extracts. Confirm product claims and ingredients against the manufacturer’s packaging.',
+        usage: 'After cleansing, apply to the face with clean hands or a cotton pad, avoiding the eye area. Follow with moisturizer and use sunscreen during the day. Follow the official product instructions.', ingredients: 'The full ingredient list was not supplied. Please use the ingredient list printed on the current product packaging.'
+      },
+      {
+        id: 7, name: 'PanOxyl 10% Soap Bar', brand: 'PanOxyl', category: 'Cleansers', filter: 'cleanse', price: 31000, image: 'bestseller/bestseller5.jpg', best: true, volume: '10% benzoyl peroxide',
+        description: 'A cleansing bar containing 10% benzoyl peroxide. Benzoyl peroxide products can be drying or irritating for some users. Check the original packaging for approved uses, warnings and suitable application areas.',
+        usage: 'Use strictly according to the product label, especially the recommended frequency and contact time. Avoid eyes, lips and sensitive areas. Benzoyl peroxide may increase dryness and can bleach fabrics. Consider asking a pharmacist or healthcare professional whether this strength is suitable for you.', ingredients: 'Benzoyl Peroxide (10%), Sodium Tallowate, Water, Glycerin, Sodium Chloride, Stearic Acid, Fragrance, Sodium Hydroxide, Cetearyl Alcohol, Propylene Glycol, Aloe Vera Extract. Verify this list against the current package.'
+      },
+      {
+        id: 8, name: 'SKIN1004 Madagascar Centella Tone Brightening Capsule Ampoule', brand: 'SKIN1004', category: 'Serums', filter: 'serums', price: 32400, image: 'bestseller/bestseller6.webp', best: true, volume: '100 ml',
+        description: 'A lightweight ampoule featuring Centella Asiatica and brightening skincare ingredients. It is intended to add hydration and help improve the appearance of uneven-looking skin tone. Check the manufacturer’s package for current claims and formulation.',
+        usage: 'After cleansing and toning, apply a few drops to the face and gently spread over the skin. Follow with moisturizer and sunscreen during the day. Follow the package directions.', ingredients: 'The ingredient list supplied for this listing should be verified against the product packaging before publication: Centella Asiatica Extract, Water, Glycerin, Niacinamide, Butylene Glycol, Sodium Hyaluronate, Propylene Glycol, Cetearyl Alcohol, Dimethicone, Panthenol (Vitamin B5), Tocopherol (Vitamin E), Fragrance, Phenoxyethanol, Ethylhexylglycerin, Disodium EDTA.'
+      }
+    ];
+
+    const productGrid = document.getElementById('productGrid');
+    const productCount = document.getElementById('productCount');
+    const desktopSearch = document.getElementById('desktopSearch');
+    const mobileSearch = document.getElementById('mobileSearch');
+    const sortSelect = document.getElementById('sortSelect');
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    let activeFilter = 'all';
+    let searchTerm = '';
+    const cart = new Map();
+    let selectedModalProduct = null;
+
+    const formatPrice = amount => new Intl.NumberFormat('en-NG', { style: 'currency', currency: 'NGN', maximumFractionDigits: 0 }).format(amount);
+    const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('is-visible');
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 3100);
+    }
+
+    function cardMarkup(product) {
+      const badge = product.best ? '<span class="product-badge best">Best seller</span>' : '<span class="product-badge">Body-care pick</span>';
+      return `
+        <article class="product-card" data-id="${product.id}">
+          <div class="product-image-wrap">
+            ${badge}
+            <img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}" loading="lazy" onerror="this.style.display='none'; this.parentElement.querySelector('.image-fallback').classList.add('is-visible');" />
+            <div class="image-fallback" aria-hidden="true"><div><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 13h20M25 13V8h14v5M21 20h22l4 35H17l4-35Z"/><path d="M23 31h18"/></svg><span>${escapeHTML(product.brand)}</span></div></div>
+            <button class="quick-view" type="button" data-quick-view="${product.id}">Quick view</button>
+          </div>
+          <div class="product-info">
+            <p class="product-category">${escapeHTML(product.brand)} · ${escapeHTML(product.category)}</p>
+            <h3 class="product-title">${escapeHTML(product.name)}</h3>
+            <div class="product-volume">${escapeHTML(product.volume || '&nbsp;')}</div>
+            <p class="product-price">${formatPrice(product.price)}</p>
+            <div class="card-actions">
+              <button class="add-to-bag" type="button" data-add-to-bag="${product.id}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>Add to bag</button>
+              <button class="details-button" type="button" data-quick-view="${product.id}" aria-label="View details for ${escapeHTML(product.name)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></svg></button>
+            </div>
+          </div>
+        </article>`;
+    }
+
+    function getVisibleProducts() {
+      let list = products.filter(product => {
+        const matchesFilter = activeFilter === 'all' || (activeFilter === 'best' ? product.best : product.filter === activeFilter);
+        const fullText = `${product.name} ${product.brand} ${product.category} ${product.description}`.toLowerCase();
+        return matchesFilter && fullText.includes(searchTerm.toLowerCase());
+      });
+      if (sortSelect.value === 'price-low') list.sort((a, b) => a.price - b.price);
+      if (sortSelect.value === 'price-high') list.sort((a, b) => b.price - a.price);
+      if (sortSelect.value === 'name') list.sort((a, b) => a.name.localeCompare(b.name));
+      return list;
+    }
+
+    function renderProducts() {
+      const list = getVisibleProducts();
+      productCount.textContent = `${list.length} ${list.length === 1 ? 'product' : 'products'}`;
+      if (!list.length) {
+        productGrid.innerHTML = '<div class="no-results" style="display:block"><strong>No products found</strong><p>Try another search term or choose a different category.</p><button class="btn btn-outline" type="button" id="clearFilters">Clear filters</button></div>';
+        document.getElementById('clearFilters').addEventListener('click', () => {
+          searchTerm = ''; desktopSearch.value = ''; mobileSearch.value = ''; activeFilter = 'all';
+          document.querySelectorAll('.filter-chip').forEach(button => { const active = button.dataset.filter === 'all'; button.classList.toggle('is-active', active); button.setAttribute('aria-pressed', String(active)); });
+          renderProducts();
+        });
+        return;
+      }
+      productGrid.innerHTML = list.map(cardMarkup).join('');
+    }
+
+    function applySearch(value, scroll = false) {
+      searchTerm = value.trim();
+      desktopSearch.value = value;
+      mobileSearch.value = value;
+      renderProducts();
+      if (scroll) document.getElementById('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('desktopSearchForm').addEventListener('submit', event => { event.preventDefault(); applySearch(desktopSearch.value, true); });
+    document.getElementById('mobileSearchForm').addEventListener('submit', event => { event.preventDefault(); applySearch(mobileSearch.value, true); });
+    desktopSearch.addEventListener('input', () => applySearch(desktopSearch.value));
+    mobileSearch.addEventListener('input', () => applySearch(mobileSearch.value));
+    document.getElementById('filterList').addEventListener('click', event => {
+      const button = event.target.closest('[data-filter]');
+      if (!button) return;
+      activeFilter = button.dataset.filter;
+      document.querySelectorAll('.filter-chip').forEach(item => {
+        const active = item === button;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-pressed', String(active));
+      });
+      renderProducts();
+    });
+    sortSelect.addEventListener('change', renderProducts);
+
+    const cartItemsElement = document.getElementById('cartItems');
+    const cartCountElement = document.getElementById('cartCount');
+    const cartButtonElement = document.getElementById('cartButton');
+    const cartModalElement = document.getElementById('cartModal');
+    const checkoutForm = document.getElementById('checkoutForm');
+
+    function getCartItemCount() {
+      return [...cart.values()].reduce((total, quantity) => total + quantity, 0);
+    }
+
+    function getCartSubtotal() {
+      return [...cart.entries()].reduce((total, [productId, quantity]) => {
+        const product = products.find(item => item.id === productId);
+        return total + (product ? product.price * quantity : 0);
+      }, 0);
+    }
+
+    function updateCartCount() {
+      const count = getCartItemCount();
+      cartCountElement.textContent = count;
+      cartButtonElement.setAttribute('aria-label', `Shopping bag, ${count} ${count === 1 ? 'item' : 'items'}`);
+    }
+
+    function renderCart() {
+      const entries = [...cart.entries()];
+      if (!entries.length) {
+        cartItemsElement.innerHTML = '<div class="cart-empty"><strong>Your bag is waiting for a favourite.</strong><span>Add products to your bag and they will appear here.</span></div>';
+      } else {
+        cartItemsElement.innerHTML = entries.map(([productId, quantity]) => {
+          const product = products.find(item => item.id === productId);
+          if (!product) return '';
+          return `
+            <article class="cart-item">
+              <div>
+                <h3 class="cart-item-title">${escapeHTML(product.name)}</h3>
+                <span class="cart-item-unit">${formatPrice(product.price)} each</span>
+              </div>
+              <div class="cart-item-controls">
+                <div class="quantity-control" aria-label="Quantity for ${escapeHTML(product.name)}">
+                  <button type="button" data-cart-action="decrease" data-product-id="${product.id}" aria-label="Decrease quantity of ${escapeHTML(product.name)}">−</button>
+                  <span class="quantity-value" aria-live="polite">${quantity}</span>
+                  <button type="button" data-cart-action="increase" data-product-id="${product.id}" aria-label="Increase quantity of ${escapeHTML(product.name)}">+</button>
+                </div>
+                <strong class="cart-line-total">${formatPrice(product.price * quantity)}</strong>
+                <button type="button" class="cart-remove" data-cart-action="remove" data-product-id="${product.id}">Remove</button>
+              </div>
+            </article>`;
+        }).join('');
+      }
+      document.getElementById('cartSubtotal').textContent = formatPrice(getCartSubtotal());
+      document.getElementById('checkoutButton').disabled = entries.length === 0;
+      updateCartCount();
+    }
+
+    function openCartModal() {
+      renderCart();
+      cartModalElement.classList.add('is-open');
+      cartModalElement.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      document.getElementById('cartClose').focus();
+    }
+
+    function closeCartModal() {
+      cartModalElement.classList.remove('is-open');
+      cartModalElement.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+
+    function addToBag(productId) {
+      const product = products.find(item => item.id === Number(productId));
+      if (!product) return;
+      cart.set(product.id, (cart.get(product.id) || 0) + 1);
+      renderCart();
+      showToast(`${product.name} added to your bag.`);
+    }
+
+    // Event delegation is used because product cards are rendered by JavaScript.
+    productGrid.addEventListener('click', event => {
+      const addButton = event.target.closest('[data-add-to-bag]');
+      if (addButton) { addToBag(addButton.dataset.addToBag); return; }
+      const quickButton = event.target.closest('[data-quick-view]');
+      if (quickButton) openProductModal(quickButton.dataset.quickView);
+    });
+
+    cartButtonElement.addEventListener('click', openCartModal);
+    document.getElementById('cartClose').addEventListener('click', closeCartModal);
+    document.getElementById('continueShopping').addEventListener('click', closeCartModal);
+    cartModalElement.addEventListener('click', event => {
+      if (event.target === cartModalElement) closeCartModal();
+    });
+    cartItemsElement.addEventListener('click', event => {
+      const actionButton = event.target.closest('[data-cart-action]');
+      if (!actionButton) return;
+      const productId = Number(actionButton.dataset.productId);
+      const currentQuantity = cart.get(productId) || 0;
+      const action = actionButton.dataset.cartAction;
+      if (action === 'increase') cart.set(productId, currentQuantity + 1);
+      if (action === 'decrease') {
+        if (currentQuantity <= 1) cart.delete(productId);
+        else cart.set(productId, currentQuantity - 1);
+      }
+      if (action === 'remove') cart.delete(productId);
+      renderCart();
+    });
+
+    checkoutForm.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!cart.size) {
+        showToast('Your bag is empty. Add a product before checkout.');
+        return;
+      }
+      if (!checkoutForm.reportValidity()) return;
+
+      const customerName = document.getElementById('customerName').value.trim();
+      const customerPhone = document.getElementById('customerPhone').value.trim();
+      const deliveryAddress = document.getElementById('deliveryAddress').value.trim();
+      const orderNotes = document.getElementById('orderNotes').value.trim();
+      const orderLines = [...cart.entries()].map(([productId, quantity], index) => {
+        const product = products.find(item => item.id === productId);
+        return `${index + 1}. ${product.name}
+   Quantity: ${quantity} × ${formatPrice(product.price)} = ${formatPrice(product.price * quantity)}`;
+      });
+      const subtotal = getCartSubtotal();
+      const message = [
+        'Hello Suavy Beauty! I would like to place an order.',
+        '',
+        'ORDER SUMMARY',
+        ...orderLines,
+        '',
+        `Products subtotal: ${formatPrice(subtotal)}`,
+        'Delivery fee: Please confirm with me.',
+        '',
+        'CUSTOMER DETAILS',
+        `Name: ${customerName}`,
+        ...(customerPhone ? [`Phone: ${customerPhone}`] : []),
+        `Delivery address/area: ${deliveryAddress}`,
+        ...(orderNotes ? [`Order notes: ${orderNotes}`] : []),
+        '',
+        'Please confirm product availability, delivery fee and payment instructions. Thank you.'
+      ].join('\n');
+
+      const whatsappUrl = `https://wa.me/2348162756139?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      showToast('WhatsApp is opening with your order. Review the details and press Send to submit it.');
+    });
+
+    function openProductModal(productId) {
+      const product = products.find(item => item.id === Number(productId));
+      if (!product) return;
+      selectedModalProduct = product;
+      document.getElementById('modalCategory').textContent = `${product.brand} · ${product.category}`;
+      document.getElementById('modalTitle').textContent = product.name;
+      document.getElementById('modalPrice').textContent = formatPrice(product.price);
+      document.getElementById('modalDescription').textContent = product.description;
+      document.getElementById('modalIngredients').textContent = product.ingredients || 'Please refer to the current product label for the full ingredient list.';
+      document.getElementById('modalImage').src = product.image;
+      document.getElementById('modalImage').alt = product.name;
+      document.getElementById('modalImage').style.display = 'block';
+      document.getElementById('modalImageFallback').classList.remove('is-visible');
+      document.getElementById('modalImage').onerror = () => {
+        document.getElementById('modalImage').style.display = 'none';
+        document.getElementById('modalImageFallback').classList.add('is-visible');
+        document.getElementById('modalImageFallback').innerHTML = `<div><span>${escapeHTML(product.brand)}</span></div>`;
+      };
+      const usageBlock = document.getElementById('usageBlock');
+      document.getElementById('modalUsage').textContent = product.usage || 'Follow the directions on the original packaging.';
+      document.getElementById('modalAddToBag').onclick = () => addToBag(product.id);
+      document.getElementById('productModal').classList.add('is-open');
+      document.body.classList.add('modal-open');
+      document.getElementById('modalClose').focus();
+    }
+    function closeProductModal() {
+      document.getElementById('productModal').classList.remove('is-open');
+      document.body.classList.remove('modal-open');
+      selectedModalProduct = null;
+    }
+    document.getElementById('modalClose').addEventListener('click', closeProductModal);
+    document.getElementById('productModal').addEventListener('click', event => { if (event.target.id === 'productModal') closeProductModal(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') { closeProductModal(); closeCartModal(); } });
+
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mainNavWrap = document.getElementById('mainNavWrap');
+    mobileMenuButton.addEventListener('click', () => {
+      const isOpen = mainNavWrap.classList.toggle('is-open');
+      mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
+      mobileMenuButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      document.body.classList.toggle('menu-open', isOpen);
+    });
+    mainNavWrap.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mainNavWrap.classList.remove('is-open');
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+    }));
+
+    document.querySelectorAll('.placeholder-link').forEach(link => link.addEventListener('click', event => {
+      event.preventDefault(); showToast(link.dataset.message || 'This link will be added before launch.');
+    }));
+    document.getElementById('newsletterForm').addEventListener('submit', event => {
+      event.preventDefault(); showToast('Newsletter sign-up is ready for backend integration. No email has been saved.'); event.currentTarget.reset();
+    });
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>

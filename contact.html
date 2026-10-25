@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#801828" />
+  <meta name="description" content="Contact Suavy Beauty for help with skincare products, orders, availability, and delivery. Chat with us on WhatsApp or call our customer care line." />
+  <title>Contact Us | Suavy Beauty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Suavy Beauty brand colours */
+      --color-primary-red: #801828;
+      --color-soft-pink: #FCE8EA;
+      --color-neutral-beige: #F5EFEB;
+      --color-header-bg: #FFFFFF;
+      --color-text-primary: #1A1A1A;
+      --color-text-secondary: #555555;
+      --color-btn-black: #000000;
+      --color-btn-text: #FFFFFF;
+      --color-border-subtle: #E0E0E0;
+      --color-white: #FFFFFF;
+      --color-champagne: #C8A77B;
+      --color-pink-dark: #F4D2D6;
+      --shadow-soft: 0 18px 45px rgba(69, 27, 34, 0.09);
+      --radius-card: 18px;
+      --container: 1200px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    body { margin: 0; color: var(--color-text-primary); background: var(--color-header-bg); font-family: "DM Sans", Arial, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    svg { display: block; }
+    .container { width: min(var(--container), calc(100% - 44px)); margin-inline: auto; }
+    .serif { font-family: "Playfair Display", Georgia, serif; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .announcement { min-height: 34px; display: flex; justify-content: center; align-items: center; padding: 7px 16px; background: var(--color-primary-red); color: #fff; text-align: center; font-size: .72rem; letter-spacing: .055em; }
+    .announcement strong { margin: 0 7px; color: #FFE4D9; }
+
+    /* Shared site header */
+    .site-header { position: relative; z-index: 20; background: #fff; }
+    .header-main { min-height: 94px; display: flex; justify-content: space-between; align-items: center; gap: 22px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; flex-shrink: 0; width: max-content; }
+    .brand-mark { width: 43px; height: 43px; flex: 0 0 43px; display: grid; place-items: center; border: 1px solid var(--color-champagne); border-radius: 50%; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: 1.6rem; font-style: italic; line-height: 1; }
+    .brand-name { display: block; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: 1.45rem; font-weight: 600; line-height: 1.1; letter-spacing: .035em; }
+    .brand-tagline { display: block; margin-top: 5px; color: var(--color-text-secondary); font-size: .58rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .header-help { display: flex; align-items: center; gap: 12px; color: var(--color-text-secondary); font-size: .84rem; }
+    .header-help strong { color: var(--color-text-primary); }
+    .header-whatsapp { display: inline-flex; align-items: center; gap: 8px; padding: 10px 15px; border: 1px solid #D9B7BC; border-radius: 3px; color: var(--color-primary-red); font-size: .76rem; font-weight: 700; transition: background .2s, color .2s; }
+    .header-whatsapp:hover { background: var(--color-primary-red); color: #fff; }
+    .header-whatsapp svg { width: 17px; height: 17px; }
+    .mobile-menu-button { display: none; border: 1px solid var(--color-border-subtle); border-radius: 4px; padding: 9px; background: #fff; color: var(--color-primary-red); }
+    .mobile-menu-button svg { width: 22px; height: 22px; }
+    .main-nav-wrap { border-top: 1px solid #f0e9e7; border-bottom: 1px solid var(--color-border-subtle); }
+    .main-nav { min-height: 48px; display: flex; align-items: center; justify-content: center; gap: clamp(20px, 3.6vw, 48px); }
+    .main-nav a { padding: 13px 0; color: #292323; font-size: .77rem; font-weight: 700; letter-spacing: .025em; transition: color .2s; }
+    .main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--color-primary-red); }
+    .category-nav { border-bottom: 1px solid #f3efed; background: #fff; }
+    .category-nav .container { min-height: 43px; display: flex; justify-content: center; align-items: center; gap: clamp(15px, 2.15vw, 28px); overflow-x: auto; scrollbar-width: none; }
+    .category-nav .container::-webkit-scrollbar { display: none; }
+    .category-nav a { flex: 0 0 auto; padding: 11px 0; color: var(--color-text-secondary); font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+    .category-nav a:hover { color: var(--color-primary-red); }
+
+    /* Buttons, headings and small visual details */
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--color-primary-red); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 25px; height: 1px; background: var(--color-champagne); }
+    .btn { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 22px; border: 1px solid transparent; border-radius: 2px; font-size: .75rem; font-weight: 700; letter-spacing: .065em; text-align: center; text-transform: uppercase; transition: transform .2s, background .2s, border-color .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-dark { background: var(--color-btn-black); color: var(--color-btn-text); }
+    .btn-dark:hover { background: var(--color-primary-red); }
+    .btn-outline { border-color: #D6B8BB; background: transparent; color: var(--color-primary-red); }
+    .btn-outline:hover { background: #fff; border-color: var(--color-primary-red); }
+    .section { padding: 76px 0; }
+    .section-heading { margin-bottom: 30px; }
+    .section-heading h2 { margin: 9px 0 8px; font-family: "Playfair Display", Georgia, serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.16; }
+    .section-heading p { max-width: 620px; margin: 0; color: var(--color-text-secondary); font-size: .96rem; }
+
+    /* Contact hero */
+    .contact-hero { position: relative; isolation: isolate; overflow: hidden; background: var(--color-soft-pink); }
+    .contact-hero::before { content: "S"; position: absolute; z-index: -1; right: max(-30px, calc((100vw - 1300px) / 2)); bottom: -170px; color: rgba(128, 24, 40, .045); font-family: "Playfair Display", Georgia, serif; font-size: clamp(25rem, 42vw, 41rem); font-style: italic; line-height: 1; pointer-events: none; }
+    .hero-grid { min-height: 330px; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 60px; padding-top: 58px; padding-bottom: 58px; }
+    .hero-copy h1 { max-width: 700px; margin: 14px 0 18px; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.8rem, 5.5vw, 4.8rem); font-weight: 500; line-height: 1.04; letter-spacing: -.045em; }
+    .hero-copy h1 em { color: var(--color-text-primary); font-weight: 500; }
+    .hero-copy p { max-width: 610px; margin: 0; color: #514548; font-size: 1rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .hero-note-card { max-width: 390px; justify-self: end; width: 100%; padding: 30px; border: 1px solid rgba(128, 24, 40, .12); background: rgba(255, 255, 255, .72); box-shadow: var(--shadow-soft); }
+    .note-icon { width: 50px; height: 50px; display: grid; place-items: center; margin-bottom: 19px; border-radius: 50%; background: #fff; color: var(--color-primary-red); }
+    .note-icon svg { width: 24px; height: 24px; }
+    .hero-note-card .note-kicker { margin: 0 0 7px; color: var(--color-primary-red); font-size: .7rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .hero-note-card h2 { margin: 0 0 10px; font-family: "Playfair Display", Georgia, serif; font-size: 1.65rem; font-weight: 500; line-height: 1.2; }
+    .hero-note-card p { margin: 0; color: var(--color-text-secondary); font-size: .9rem; }
+    .breadcrumb { padding: 16px 0; border-bottom: 1px solid #f1eae8; color: #777; font-size: .76rem; }
+    .breadcrumb a:hover { color: var(--color-primary-red); }
+    .breadcrumb span { padding: 0 8px; color: var(--color-champagne); }
+
+    /* Contact options */
+    .contact-section { padding-top: 66px; }
+    .contact-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 17px; }
+    .contact-card { min-height: 235px; display: flex; flex-direction: column; align-items: flex-start; padding: 25px 22px; border: 1px solid var(--color-border-subtle); background: #fff; transition: transform .2s, box-shadow .2s, border-color .2s; }
+    a.contact-card:hover { transform: translateY(-4px); border-color: #D8B4BA; box-shadow: var(--shadow-soft); }
+    .contact-icon { width: 47px; height: 47px; display: grid; place-items: center; margin-bottom: 20px; border-radius: 50%; background: var(--color-soft-pink); color: var(--color-primary-red); }
+    .contact-icon svg { width: 22px; height: 22px; }
+    .contact-card h3 { margin: 0 0 7px; font-family: "Playfair Display", Georgia, serif; font-size: 1.26rem; font-weight: 500; line-height: 1.2; }
+    .contact-card p { margin: 0 0 15px; color: var(--color-text-secondary); font-size: .83rem; line-height: 1.55; }
+    .contact-card .card-link { margin-top: auto; display: inline-flex; align-items: center; gap: 7px; color: var(--color-primary-red); font-size: .78rem; font-weight: 700; }
+    .contact-card .card-link svg { width: 15px; height: 15px; }
+    .contact-card .card-value { margin: 0 0 9px; color: var(--color-text-primary); font-size: .9rem; font-weight: 700; overflow-wrap: anywhere; }
+    .placeholder-card { background: linear-gradient(145deg, #fff 35%, #FCF5F3 100%); }
+    .placeholder-status { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding: 6px 9px; border: 1px solid #ead6d4; border-radius: 30px; color: #79575A; font-size: .65rem; font-weight: 700; letter-spacing: .035em; text-transform: uppercase; }
+    .placeholder-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--color-champagne); }
+    .contact-card.placeholder-card h3 { margin-bottom: 8px; }
+
+    /* Message form + side information */
+    .message-section { background: #FCF9F7; }
+    .message-layout { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(35px, 7vw, 95px); align-items: start; }
+    .message-intro { position: sticky; top: 24px; }
+    .message-intro h2 { margin: 12px 0 15px; color: var(--color-primary-red); font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.15rem, 4vw, 3.2rem); font-weight: 500; line-height: 1.12; letter-spacing: -.035em; }
+    .message-intro > p { margin: 0; color: var(--color-text-secondary); font-size: .94rem; }
+    .help-points { display: grid; gap: 17px; margin: 27px 0 0; padding: 0; list-style: none; }
+    .help-points li { display: flex; align-items: flex-start; gap: 12px; color: #464040; font-size: .86rem; }
+    .check-mark { flex: 0 0 23px; width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%; background: #F3E3E2; color: var(--color-primary-red); font-size: .8rem; font-weight: 700; }
+    .message-form { padding: clamp(23px, 4vw, 38px); border: 1px solid #E9DEDA; background: #fff; box-shadow: 0 13px 36px rgba(69, 27, 34, .045); }
+    .form-heading { margin-bottom: 25px; }
+    .form-heading h3 { margin: 0 0 5px; font-family: "Playfair Display", Georgia, serif; font-size: 1.75rem; font-weight: 500; }
+    .form-heading p { margin: 0; color: var(--color-text-secondary); font-size: .84rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 15px; }
+    .form-field { min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label { color: #342c2d; font-size: .78rem; font-weight: 700; }
+    .form-field input, .form-field select, .form-field textarea { width: 100%; min-height: 48px; padding: 12px 13px; outline: none; border: 1px solid #DED6D3; border-radius: 2px; background: #fff; color: var(--color-text-primary); font-size: .88rem; transition: border-color .2s, box-shadow .2s; }
+    .form-field textarea { min-height: 142px; resize: vertical; }
+    .form-field input::placeholder, .form-field textarea::placeholder { color: #97908E; }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--color-primary-red); box-shadow: 0 0 0 3px rgba(128, 24, 40, .08); }
+    .form-submit { width: 100%; margin-top: 20px; border: 0; }
+    .form-privacy { display: flex; align-items: flex-start; gap: 9px; margin: 13px 0 0; color: #777; font-size: .72rem; line-height: 1.5; }
+    .form-privacy svg { width: 16px; height: 16px; flex: 0 0 16px; margin-top: 2px; color: var(--color-primary-red); }
+    .form-status { display: none; margin: 14px 0 0; padding: 11px 13px; border-left: 3px solid var(--color-primary-red); background: var(--color-soft-pink); color: var(--color-primary-red); font-size: .82rem; }
+    .form-status.is-visible { display: block; }
+
+    /* FAQ */
+    .faq-layout { display: grid; grid-template-columns: .7fr 1.3fr; gap: 70px; align-items: start; }
+    .faq-heading h2 { margin: 12px 0 12px; font-family: "Playfair Display", Georgia, serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 500; line-height: 1.12; }
+    .faq-heading p { margin: 0; color: var(--color-text-secondary); font-size: .91rem; }
+    .faq-list { border-top: 1px solid var(--color-border-subtle); }
+    .faq-item { border-bottom: 1px solid var(--color-border-subtle); }
+    .faq-question { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 0; border: 0; background: transparent; color: var(--color-text-primary); text-align: left; font-size: .93rem; font-weight: 700; }
+    .faq-question span:last-child { flex: 0 0 27px; width: 27px; height: 27px; display: grid; place-items: center; border: 1px solid #E3D1D0; border-radius: 50%; color: var(--color-primary-red); font-size: 1.1rem; font-weight: 400; transition: transform .2s; }
+    .faq-question[aria-expanded="true"] span:last-child { transform: rotate(45deg); }
+    .faq-answer { padding: 0 44px 19px 0; color: var(--color-text-secondary); font-size: .87rem; }
+    .faq-answer[hidden] { display: none; }
+
+    /* Footer */
+    .site-footer { background: #24191B; color: #F7F1F0; }
+    .footer-main { display: grid; grid-template-columns: 1.25fr .75fr .9fr 1fr; gap: 42px; padding-top: 58px; padding-bottom: 46px; }
+    .footer-brand .brand-name { color: #fff; }
+    .footer-brand .brand-tagline { color: #D3C1C2; }
+    .footer-brand .brand-mark { border-color: var(--color-champagne); color: #F6DADD; }
+    .footer-brand > p { max-width: 270px; margin: 20px 0 18px; color: #CBBFC0; font-size: .85rem; }
+    .footer-column { display: flex; flex-direction: column; align-items: flex-start; gap: 11px; }
+    .footer-column h3 { margin: 3px 0 8px; color: #fff; font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+    .footer-column a { color: #CBBFC0; font-size: .83rem; transition: color .2s; }
+    .footer-column a:hover { color: #F7DCE0; }
+    .footer-note { margin: 0; color: #CBBFC0; font-size: .82rem; }
+    .footer-socials { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 4px; }
+    .social-link { min-width: 42px; min-height: 42px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 9px; border: 1px solid #6A5558; border-radius: 3px; color: #F9E7E9; transition: background .2s, border-color .2s, color .2s; }
+    .social-link svg { width: 19px; height: 19px; }
+    a.social-link:hover { border-color: #D9B3B8; background: rgba(252, 232, 234, .09); }
+    .social-link.placeholder { min-width: 0; padding-inline: 12px; color: #C9B9BA; border-style: dashed; cursor: default; font-size: .73rem; }
+    .footer-bottom { min-height: 62px; display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid #4A393B; color: #BEB0B1; font-size: .73rem; }
+    .footer-bottom p { margin: 12px 0; }
+
+    @media (max-width: 1000px) {
+      .contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-grid { gap: 35px; }
+      .footer-main { grid-template-columns: 1.2fr 1fr; gap: 35px 50px; }
+      .message-layout { gap: 42px; }
+      .faq-layout { gap: 42px; }
+    }
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 80px; }
+      .container { width: calc(100% - 32px); }
+      .header-main { min-height: 76px; gap: 12px; }
+      .mobile-menu-button { display: grid; place-items: center; order: 0; }
+      .brand { gap: 8px; }
+      .brand-mark { width: 37px; height: 37px; flex-basis: 37px; font-size: 1.35rem; }
+      .brand-name { font-size: 1.13rem; }
+      .brand-tagline { font-size: .5rem; letter-spacing: .08em; }
+      .header-help > span { display: none; }
+      .header-whatsapp { padding: 9px; font-size: 0; }
+      .header-whatsapp svg { width: 19px; height: 19px; }
+      .main-nav-wrap { display: none; position: absolute; top: 100%; left: 0; right: 0; padding: 8px 16px 15px; background: #fff; box-shadow: 0 18px 25px rgba(0, 0, 0, .09); }
+      .main-nav-wrap.is-open { display: block; }
+      .main-nav { width: 100%; flex-direction: column; align-items: stretch; gap: 0; }
+      .main-nav a { padding: 15px 5px; border-bottom: 1px solid #f1e9e7; font-size: .86rem; }
+      .main-nav a:last-child { border-bottom: 0; }
+      .category-nav .container { width: 100%; justify-content: flex-start; gap: 21px; padding-inline: 16px; }
+      .category-nav a { font-size: .66rem; }
+      .hero-grid { min-height: 0; grid-template-columns: 1fr; gap: 30px; padding-top: 48px; padding-bottom: 43px; }
+      .hero-copy h1 { font-size: clamp(2.6rem, 11vw, 4rem); }
+      .hero-note-card { max-width: none; justify-self: stretch; padding: 23px; }
+      .contact-section { padding-top: 48px; }
+      .section { padding: 55px 0; }
+      .contact-grid { gap: 12px; }
+      .contact-card { min-height: 220px; padding: 19px 16px; }
+      .contact-card h3 { font-size: 1.1rem; }
+      .contact-card p { font-size: .79rem; }
+      .contact-icon { width: 42px; height: 42px; margin-bottom: 15px; }
+      .message-layout, .faq-layout { grid-template-columns: 1fr; gap: 32px; }
+      .message-intro { position: static; }
+      .faq-layout { gap: 25px; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 35px 24px; padding-top: 43px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 450px) {
+      .announcement { font-size: .61rem; }
+      .header-main { gap: 7px; }
+      .mobile-menu-button { padding: 7px; }
+      .brand { gap: 6px; }
+      .brand-name { font-size: 1rem; }
+      .brand-tagline { display: none; }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+      .contact-card { min-height: 235px; padding: 16px 13px; }
+      .contact-card .card-value { font-size: .82rem; }
+      .contact-card .card-link { font-size: .72rem; }
+      .placeholder-status { font-size: .59rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: auto; }
+      .message-form { padding: 21px 17px; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 30px 20px; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; gap: 0; padding: 10px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement">YOUR BEAUTY ROUTINE, MADE SIMPLE <strong>•</strong> We're happy to help</div>
+
+  <header class="site-header">
+    <div class="container header-main">
+      <button class="mobile-menu-button" id="mobileMenuButton" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNavWrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </button>
+      <a class="brand" href="index.html" aria-label="Suavy Beauty homepage">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span><span class="brand-name">SUAVY BEAUTY</span><span class="brand-tagline">Healthy skin. Soft glow.</span></span>
+      </a>
+      <div class="header-help">
+        <span><strong>Need a hand?</strong> We're here to help.</span>
+        <a class="header-whatsapp" href="https://wa.me/2348162756139" target="_blank" rel="noopener noreferrer" aria-label="Chat with Suavy Beauty on WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.4 11.7a8.3 8.3 0 0 1-12.3 7.2L3 20l1.2-4.8a8.3 8.3 0 1 1 16.2-3.5Z"/><path d="M8.8 8.2c.3-.6.6-.6.9-.6h.4c.2 0 .4.2.5.5l.6 1.4c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4 0 .6.5.7 1.2 1.3 2 1.7.3.2.5.2.7-.1l.7-.8c.2-.2.4-.2.7-.1l1.3.6c.3.1.4.3.4.5 0 .4-.2.9-.6 1.2-.4.4-1.1.6-1.8.5-.8-.1-1.9-.6-3-1.6-1.3-1.2-1.9-2.4-2.1-3.3-.2-.7.1-1.3.3-1.7Z"/></svg>
+          WhatsApp us
+        </a>
+      </div>
+    </div>
+    <div class="main-nav-wrap" id="mainNavWrap">
+      <nav class="main-nav container" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html" aria-current="page">Contact Us</a>
+      </nav>
+    </div>
+    <nav class="category-nav" aria-label="Shop categories">
+      <div class="container">
+        <a href="brands.html">Brands</a>
+        <a href="for-women.html">For Women</a>
+        <a href="skincare.html">Skincare</a>
+        <a href="sunscreen.html">Sunscreen</a>
+        <a href="bath-body.html">Bath &amp; Body</a>
+        <a href="face.html">Face</a>
+        <a href="oils-serums.html">Oils &amp; Serums</a>
+        <a href="treatments.html">Treatments</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="contact-hero" aria-labelledby="heroTitle">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Suavy Beauty customer care</span>
+          <h1 id="heroTitle">Let's talk about <em>your glow.</em></h1>
+          <p>Need help choosing a product, checking availability, or asking about an order? Send us a message. We want your shopping experience to feel simple, personal, and stress-free.</p>
+          <div class="hero-actions">
+            <a class="btn btn-dark" href="https://wa.me/2348162756139?text=Hello%20Suavy%20Beauty%2C%20I%20need%20some%20assistance." target="_blank" rel="noopener noreferrer">Chat on WhatsApp <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="#contact-form">Send a message</a>
+          </div>
+        </div>
+        <aside class="hero-note-card" aria-label="Customer care note">
+          <div class="note-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 8.7 4a8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.4Z"/><path d="M8.8 9h.1m3.1 0h.1m3.1 0h.1M8.8 13h.1m3.1 0h.1m3.1 0h.1"/></svg></div>
+          <p class="note-kicker">A little help goes a long way</p>
+          <h2>Questions are always welcome.</h2>
+          <p>Tell us what you need and we'll help you find the right next step, from product information to order support.</p>
+        </aside>
+      </div>
+    </section>
+
+    <div class="container breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact Us</span></div>
+
+    <section class="section contact-section" aria-labelledby="contactOptionsTitle">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Get in touch</span>
+          <h2 id="contactOptionsTitle">Choose what works for you.</h2>
+          <p>Reach us through the channel that feels easiest. Our social profiles will be added here when the official links are confirmed.</p>
+        </div>
+        <div class="contact-grid">
+          <a class="contact-card" href="https://wa.me/2348162756139" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp chat with Suavy Beauty">
+            <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.4 11.7a8.3 8.3 0 0 1-12.3 7.2L3 20l1.2-4.8a8.3 8.3 0 1 1 16.2-3.5Z"/><path d="M8.8 8.2c.3-.6.6-.6.9-.6h.4c.2 0 .4.2.5.5l.6 1.4c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4 0 .6.5.7 1.2 1.3 2 1.7.3.2.5.2.7-.1l.7-.8c.2-.2.4-.2.7-.1l1.3.6c.3.1.4.3.4.5 0 .4-.2.9-.6 1.2-.4.4-1.1.6-1.8.5-.8-.1-1.9-.6-3-1.6-1.3-1.2-1.9-2.4-2.1-3.3-.2-.7.1-1.3.3-1.7Z"/></svg></span>
+            <h3>WhatsApp</h3>
+            <p>Send us a message about products, availability, or an order.</p>
+            <span class="card-link">Start a chat <span aria-hidden="true">→</span></span>
+          </a>
+          <a class="contact-card" href="tel:+2348162756139" aria-label="Call Suavy Beauty at +234 816 275 6139">
+            <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16.5v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 1.1 3.8 2 2 0 0 1 3.1 1.6h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L7 9.6a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg></span>
+            <h3>Call Us</h3>
+            <p>Prefer to speak directly? You can call our customer care line.</p>
+            <span class="card-value">+234 816 275 6139</span>
+            <span class="card-link">Call now <span aria-hidden="true">→</span></span>
+          </a>
+          <div class="contact-card placeholder-card" aria-label="Instagram profile link to be added later">
+            <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r=".8" fill="currentColor"/></svg></span>
+            <h3>Instagram</h3>
+            <p>Follow our beauty updates, new arrivals, and product highlights.</p>
+            <span class="placeholder-status">Link coming soon</span>
+          </div>
+          <div class="contact-card placeholder-card" aria-label="TikTok profile link to be added later">
+            <span class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11.1a4.1 4.1 0 1 1-3.7-4.1"/><path d="M14 3c.5 2.6 2.3 4.2 5 4.5"/></svg></span>
+            <h3>TikTok</h3>
+            <p>Short beauty tips, product spotlights, and more content to come.</p>
+            <span class="placeholder-status">Link coming soon</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section message-section" id="contact-form" aria-labelledby="messageTitle">
+      <div class="container message-layout">
+        <div class="message-intro">
+          <span class="eyebrow">Send us a message</span>
+          <h2 id="messageTitle">How can we help you today?</h2>
+          <p>Fill in the details below and your message will be prepared in WhatsApp, ready for you to review and send to Suavy Beauty.</p>
+          <ul class="help-points">
+            <li><span class="check-mark" aria-hidden="true">✓</span><span>Ask about product availability, prices, or how to use a product.</span></li>
+            <li><span class="check-mark" aria-hidden="true">✓</span><span>Get help with an order or delivery question.</span></li>
+            <li><span class="check-mark" aria-hidden="true">✓</span><span>Share feedback about your shopping experience.</span></li>
+          </ul>
+        </div>
+
+        <form class="message-form" id="messageForm">
+          <div class="form-heading">
+            <h3>Write to us</h3>
+            <p>Fields marked with * are required.</p>
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="customerName">Your name *</label>
+              <input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="Enter your name" required />
+            </div>
+            <div class="form-field">
+              <label for="customerEmail">Email address</label>
+              <input id="customerEmail" name="customerEmail" type="email" autocomplete="email" placeholder="you@example.com" />
+            </div>
+            <div class="form-field full">
+              <label for="messageTopic">What can we help with? *</label>
+              <select id="messageTopic" name="messageTopic" required>
+                <option value="" disabled selected>Select a topic</option>
+                <option>Product information or availability</option>
+                <option>Order or delivery</option>
+                <option>Payment question</option>
+                <option>Returns or refunds</option>
+                <option>Feedback or other enquiry</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label for="customerMessage">Your message *</label>
+              <textarea id="customerMessage" name="customerMessage" placeholder="Tell us how we can help..." required></textarea>
+            </div>
+          </div>
+          <button class="btn btn-dark form-submit" type="submit">Continue to WhatsApp <span aria-hidden="true">↗</span></button>
+          <p class="form-privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span>This starter form does not store your details. It opens WhatsApp with your message so you can review it and choose whether to send it.</span></p>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="faqTitle">
+      <div class="container faq-layout">
+        <div class="faq-heading">
+          <span class="eyebrow">A few quick answers</span>
+          <h2 id="faqTitle">Frequently asked questions.</h2>
+          <p>Can't find what you need? Message us directly and we'll do our best to help.</p>
+          <a class="btn btn-outline" style="margin-top:22px" href="https://wa.me/2348162756139?text=Hello%20Suavy%20Beauty%2C%20I%20have%20a%20question." target="_blank" rel="noopener noreferrer">Ask us on WhatsApp <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer1"><span>How can I check if a product is available?</span><span aria-hidden="true">+</span></button>
+            <div class="faq-answer" id="faqAnswer1" hidden>Send us the product name through WhatsApp. We'll help confirm availability and provide the current price before you place an order.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer2"><span>How do I ask about delivery?</span><span aria-hidden="true">+</span></button>
+            <div class="faq-answer" id="faqAnswer2" hidden>Contact us with your location and the items you're interested in. Delivery options, fees, and estimated timelines should be confirmed with you before an order is finalised.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer3"><span>Can you recommend a skincare product for me?</span><span aria-hidden="true">+</span></button>
+            <div class="faq-answer" id="faqAnswer3" hidden>We can share product descriptions and usage information provided for the products we sell. Skincare needs vary, so contact a qualified healthcare professional for persistent skin concerns or medical advice.</div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false" aria-controls="faqAnswer4"><span>Where can I find your Instagram and TikTok?</span><span aria-hidden="true">+</span></button>
+            <div class="faq-answer" id="faqAnswer4" hidden>Our Instagram and TikTok links are being prepared. We'll add the official profiles here once they are confirmed.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <a class="brand" href="index.html" aria-label="Suavy Beauty home">
+          <span class="brand-mark" aria-hidden="true">S</span>
+          <span><span class="brand-name">SUAVY BEAUTY</span><span class="brand-tagline">Healthy skin. Soft glow.</span></span>
+        </a>
+        <p>Authentic and affordable skincare and beauty essentials, chosen to make shopping feel simple.</p>
+        <div class="footer-socials" aria-label="Social profiles">
+          <span class="social-link placeholder" title="Official Instagram link to be added">Instagram</span>
+          <span class="social-link placeholder" title="Official TikTok link to be added">TikTok</span>
+          <a class="social-link" href="https://wa.me/2348162756139" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Suavy Beauty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.4 11.7a8.3 8.3 0 0 1-12.3 7.2L3 20l1.2-4.8a8.3 8.3 0 1 1 16.2-3.5Z"/><path d="M8.8 8.2c.3-.6.6-.6.9-.6h.4c.2 0 .4.2.5.5l.6 1.4c.1.2.1.4-.1.6l-.5.6c-.2.2-.2.4 0 .6.5.7 1.2 1.3 2 1.7.3.2.5.2.7-.1l.7-.8c.2-.2.4-.2.7-.1l1.3.6c.3.1.4.3.4.5 0 .4-.2.9-.6 1.2-.4.4-1.1.6-1.8.5-.8-.1-1.9-.6-3-1.6-1.3-1.2-1.9-2.4-2.1-3.3-.2-.7.1-1.3.3-1.7Z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h3>Explore</h3>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Suavy</a>
+        <a href="shop.html">Shop all products</a>
+        <a href="brands.html">Our brands</a>
+      </div>
+      <div class="footer-column">
+        <h3>Customer care</h3>
+        <a href="contact.html" aria-current="page">Contact us</a>
+        <a href="delivery.html">Delivery information</a>
+        <a href="returns.html">Returns &amp; refunds</a>
+        <a href="privacy.html">Privacy policy</a>
+      </div>
+      <div class="footer-column">
+        <h3>Contact details</h3>
+        <p class="footer-note">WhatsApp and phone support</p>
+        <a href="https://wa.me/2348162756139" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
+        <a href="tel:+2348162756139">+234 816 275 6139</a>
+        <p class="footer-note" style="margin-top:7px">Instagram and TikTok links will be added when confirmed.</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="currentYear">2026</span> Suavy Beauty. All rights reserved.</p>
+      <p>Healthy skin. Soft glow. Authentic and affordable.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation menu
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mainNavWrap = document.getElementById('mainNavWrap');
+    mobileMenuButton.addEventListener('click', () => {
+      const isOpen = mainNavWrap.classList.toggle('is-open');
+      mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
+      mobileMenuButton.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+      document.body.classList.toggle('menu-open', isOpen);
+    });
+    mainNavWrap.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      mainNavWrap.classList.remove('is-open');
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      mobileMenuButton.setAttribute('aria-label', 'Open navigation menu');
+      document.body.classList.remove('menu-open');
+    }));
+
+    // Contact form: prepare the customer's details in WhatsApp. No form data is stored on this static website.
+    const messageForm = document.getElementById('messageForm');
+    const formStatus = document.getElementById('formStatus');
+    messageForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!messageForm.reportValidity()) return;
+
+      const name = document.getElementById('customerName').value.trim();
+      const email = document.getElementById('customerEmail').value.trim();
+      const topic = document.getElementById('messageTopic').value;
+      const message = document.getElementById('customerMessage').value.trim();
+      const lines = [
+        'Hello Suavy Beauty,',
+        '',
+        'My name is: ' + name,
+        email ? 'My email: ' + email : '',
+        'Enquiry: ' + topic,
+        '',
+        'Message: ' + message
+      ].filter(line => line !== undefined);
+      const whatsappUrl = 'https://wa.me/2348162756139?text=' + encodeURIComponent(lines.join('\n'));
+
+      formStatus.textContent = 'WhatsApp is opening with your message. Please review it and press Send in WhatsApp to contact Suavy Beauty.';
+      formStatus.classList.add('is-visible');
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        const answer = document.getElementById(button.getAttribute('aria-controls'));
+        button.setAttribute('aria-expanded', String(!isExpanded));
+        answer.hidden = isExpanded;
+      });
+    });
+
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
